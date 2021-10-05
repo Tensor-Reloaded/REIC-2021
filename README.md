@@ -2,11 +2,11 @@
 FII's Master students ASET Renewable energy investment calculator project
 
 
-##Project name: 
+## Project name: 
 
 Renewable energy investment calculator (**REIC**)
 
-##Member names: 
+## Member names: 
 
 Barbu Alexandru  ()
 
@@ -16,7 +16,7 @@ Pavel Andrei     ()
 
 Vasilița Irina   ()
 
-##Coordinator: 
+## Coordinator: 
 
 Iftene Adrian
 
