@@ -8,7 +8,7 @@ Renewable energy investment calculator (**REIC**)
 
 ## Member names: 
 
-Barbu Alexandru  ()
+Barbu Alexandru  (barbugalexandru@gmail.com)
 
 Bucnaru Raluca   (raluca.bucnaru@gmail.com)
 
