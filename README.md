@@ -14,7 +14,7 @@ Bucnaru Raluca   (raluca.bucnaru@gmail.com)
 
 Pavel Andrei     ()
 
-Vasilița Irina   ()
+Vasilița Irina   (irinavasilitav@gmail.com)
 
 ## Coordinator: 
 
