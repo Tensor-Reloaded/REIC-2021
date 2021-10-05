@@ -12,7 +12,7 @@ Barbu Alexandru  (barbugalexandru@gmail.com)
 
 Bucnaru Raluca   (raluca.bucnaru@gmail.com)
 
-Pavel Andrei     ()
+Pavel Andrei     (andrei_pavel99@yahoo.com)
 
 Vasilița Irina   (irinavasilitav@gmail.com)
 
