@@ -12,6 +12,8 @@ Barbu Alexandru  (barbugalexandru@gmail.com)
 
 Bucnaru Raluca   (raluca.bucnaru@gmail.com)
 
+Hoamea Teodora  ()
+
 Pavel Andrei     (andrei_pavel99@yahoo.com)
 
 Vasilița Irina   (irinavasilitav@gmail.com)
