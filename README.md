@@ -12,7 +12,7 @@ Barbu Alexandru  (barbugalexandru@gmail.com)
 
 Bucnaru Raluca   (raluca.bucnaru@gmail.com)
 
-Hoamea Teodora  ()
+Hoamea Teodora  (teodora.hoamea@gmail.com)
 
 Pavel Andrei     (andrei_pavel99@yahoo.com)
 
