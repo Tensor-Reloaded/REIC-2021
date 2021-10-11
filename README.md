@@ -12,11 +12,11 @@ Barbu Alexandru  (MOC) (barbugalexandru@gmail.com)
 
 Bucnaru Raluca   (MOC) (raluca.bucnaru@gmail.com)
 
-Hoamea Teodora  (MSD)(teodora.hoamea@gmail.com)
+Hoamea Teodora  (MSD) (teodora.hoamea@gmail.com)
 
-Pavel Andrei     (MOC)(andrei_pavel99@yahoo.com)
+Pavel Andrei     (MOC) (andrei_pavel99@yahoo.com)
 
-Vasilița Irina   (MOC)(irinavasilitav@gmail.com)
+Vasilița Irina   (MOC) (irinavasilitav@gmail.com)
 
 ## Coordinator: 
 
