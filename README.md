@@ -26,7 +26,10 @@ Colab. Simionescu Cristian
 
 ## Tasks: 
 
-https://github.com/Tensor-Reloaded/REIC/projects/1
+[Github Projects](https://github.com/Tensor-Reloaded/REIC/projects/1)
 
-https://docs.google.com/document/d/1Aych3kMbOITvEatapnpop-4vlV0QWU93wUUWygQOreQ/edit
+[Doc specifying what everyone does](https://docs.google.com/document/d/1Aych3kMbOITvEatapnpop-4vlV0QWU93wUUWygQOreQ)
+
+## State of Art:
+
 
