@@ -28,7 +28,7 @@ Colab. Simionescu Cristian
 
 [Github Projects](https://github.com/Tensor-Reloaded/REIC/projects/1)
 
-[Doc specifying what everyone does](https://docs.google.com/document/d/1Aych3kMbOITvEatapnpop-4vlV0QWU93wUUWygQOreQ)
+[Doc specifying what everyone does](https://docs.google.com/document/d/1Aych3kMbOITvEatapnpop-4vlV0QWU93wUUWygQOreQ/edit?usp=sharing)
 
 ## State of Art:
 
