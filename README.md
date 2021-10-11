@@ -20,7 +20,13 @@ Vasilița Irina   (irinavasilitav@gmail.com)
 
 ## Coordinator: 
 
-Iftene Adrian
+Prof. Dr. Iftene Adrian
 
-Simionescu Cristian
+Colab. Simionescu Cristian
+
+## Tasks: 
+
+https://github.com/Tensor-Reloaded/REIC/projects/1
+
+https://docs.google.com/document/d/1Aych3kMbOITvEatapnpop-4vlV0QWU93wUUWygQOreQ/edit
 
