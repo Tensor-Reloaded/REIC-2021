@@ -31,5 +31,5 @@ Colab. Simionescu Cristian
 [Doc specifying what everyone does](https://docs.google.com/document/d/1Aych3kMbOITvEatapnpop-4vlV0QWU93wUUWygQOreQ/edit?usp=sharing)
 
 ## State of Art:
-
+[REIC-State of Art](https://docs.google.com/document/d/1ipdTFoNUxRb2QHOWcSKvm-sowuk8P5Al0WfxBCtT5Ho/edit?usp=sharing)
 
