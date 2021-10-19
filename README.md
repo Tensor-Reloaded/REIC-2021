@@ -33,3 +33,6 @@ Colab. Simionescu Cristian
 ## State of Art:
 [REIC-State of Art](https://docs.google.com/document/d/1ipdTFoNUxRb2QHOWcSKvm-sowuk8P5Al0WfxBCtT5Ho/edit?usp=sharing)
 
+## Requirements and diagrams:
+[REIC-Requirements](https://docs.google.com/document/d/1-rmfZce7hg5LEKqbWaxynpGvl54-3VnXNuiyeggAqEk/edit?usp=sharing)
+
