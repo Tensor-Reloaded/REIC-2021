@@ -26,8 +26,8 @@
             <div class="menu">
                 <nav role="navigation" class="navigation-items w-nav-menu">
                     @Html.ActionLink("About", "Index", "Home", null, new Dictionary<string, object> { { "aria-current", "page" }, { "class", "navigation-item w-nav-link w--current" } })
-                    @Html.ActionLink("Solar Energy", "SolarEnergy", "Home", null, new Dictionary<string, object> { { "class", "navigation-item w-nav-link" } })
-                    @Html.ActionLink("Wind Energy", "WindEnergy", "Home", null, new Dictionary<string, object> { { "class", "navigation-item w-nav-link" } })
+                    @Html.ActionLink("Solar Energy", "Index", "SolarEnergy", null, new Dictionary<string, object> { { "class", "navigation-item w-nav-link" } })
+                    @Html.ActionLink("Wind Energy", "Index", "WindEnergy", null, new Dictionary<string, object> { { "class", "navigation-item w-nav-link" } })
                     @Html.ActionLink("Contact", "Contact", "Home", null, new Dictionary<string, object> { { "class", "navigation-item w-nav-link" } })
                 </nav>
                 <div class="menu-button w-nav-button"><img src="~/Content/images/menu-icon_1menu-icon.png" width="22" alt="" class="menu-icon"></div>

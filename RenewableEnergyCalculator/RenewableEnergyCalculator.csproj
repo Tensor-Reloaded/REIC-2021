@@ -121,6 +121,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SolarEnergyController.cs" />
+    <Compile Include="Controllers\WindEnergyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,9 +184,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\SolarEnergy.cshtml" />
-    <Content Include="Views\Home\WindEnergy.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\SolarEnergy\SolarEnergy.cshtml" />
+    <Content Include="Views\WindEnergy\WindEnergy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
