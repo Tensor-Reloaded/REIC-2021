@@ -11,14 +11,16 @@ namespace RenewableEnergyCalculator.Models
         private readonly IMongoDatabase _mongoDb;
         public MongoDbContext()
         {
-            var client = new MongoClient("mongodb+srv://reic:<password>@reic-cluster.mbfck.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://reic:reic2021@reic-cluster.mbfck.mongodb.net/REIC-DB?retryWrites=true&w=majority");
+            var client = new MongoClient(settings);
             _mongoDb = client.GetDatabase("REIC-DB");
         }
-        public IMongoCollection<Panel> Panel
+        public IMongoCollection<Panel> PanelsCollection
         {
             get
             {
-                return _mongoDb.GetCollection<Panel>("Panel");
+                var panels = _mongoDb.GetCollection<Panel>("Panels");
+                return panels;
             }
         }
     }

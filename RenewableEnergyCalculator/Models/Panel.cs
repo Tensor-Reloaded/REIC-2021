@@ -12,8 +12,14 @@ namespace RenewableEnergyCalculator.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; set; }
+
+        [BsonElement("Model")]
+        public string Model { get; set; }
+
+        [BsonElement("Manufacturer")]
         public string Manufacturer { get; set; }
-        public float Efficency { get; set; }
+
+        [BsonElement("Efficency")]
+        public double  Efficency { get; set; }
     }
 }
