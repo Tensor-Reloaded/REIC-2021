@@ -37,10 +37,15 @@ namespace REIC
         }
     }
 
-    struct GeographicalPoint
+    public struct GeographicalPoint
     {
-        public double Longitude { get; }
         public double Latitude { get; }
+        public double Longitude { get; }
+        public GeographicalPoint(double latitude, double longitude)
+        {
+            this.Longitude = longitude;
+            this.Latitude = latitude;
+        }
     }
 
 }

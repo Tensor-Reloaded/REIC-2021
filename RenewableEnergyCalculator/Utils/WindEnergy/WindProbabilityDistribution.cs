@@ -16,12 +16,11 @@ namespace REIC
             C = c;
         }
 
-        // NOTE Could be a factory or some stuff if we want to
-
         /// Fit historical wind data to a probability distribution.
         /// @param windData To be defined in the map module (we need 3d data: (longitude, latitude, time) -> wind value)
-        public static WindProbabilityDistribution FitData(ILandResource windData)
+        public static WindProbabilityDistribution FitData(List<HistoricalClimateSample> historicalData)
         {
+           // List<double> data =;
             //return new WindProbabilityDistribution(...);
             throw new NotImplementedException();
         }
