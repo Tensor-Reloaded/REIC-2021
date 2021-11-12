@@ -11,7 +11,9 @@ namespace RenewableEnergyCalculator.Models
         private readonly IMongoDatabase _mongoDb;
         public MongoDbContext()
         {
-            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://reic:reic2021@reic-cluster.mbfck.mongodb.net/REIC-DB?retryWrites=true&w=majority");
+            var username = System.Configuration.ConfigurationManager.AppSettings["MongoUsername"];
+            var password = System.Configuration.ConfigurationManager.AppSettings["MongoPassword"];
+            var settings = MongoClientSettings.FromConnectionString("mongodb+srv://"+ username + ":" + password + "@reic-cluster.mbfck.mongodb.net/REIC-DB?retryWrites=true&w=majority");
             var client = new MongoClient(settings);
             _mongoDb = client.GetDatabase("REIC-DB");
         }
