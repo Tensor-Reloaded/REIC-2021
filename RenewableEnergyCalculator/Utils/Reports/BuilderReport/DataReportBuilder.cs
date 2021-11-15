@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using REIC;
 
 namespace builderReport
 {
     public class DataReportBuilder:IDataReportBuilder
     {
         private DataReport _dataReport;
-        private IEnumerable<Data> _datas;
-        public DataReportBuilder(IEnumerable<Data> datas)
+        private IEnumerable<ResultEnergyData> _datas;
+        public DataReportBuilder(IEnumerable<ResultEnergyData> datas)
         {
             _datas = datas;
             _dataReport = new DataReport();

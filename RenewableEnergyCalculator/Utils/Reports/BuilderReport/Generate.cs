@@ -8,6 +8,7 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.IO.Image;
+using REIC;
 
 namespace builderReport
 {
@@ -17,8 +18,8 @@ namespace builderReport
         {
             var products = new List<ResultEnergyData>
         {
-            new ResultEnergyData{ ... },
-            new ResultEnergyData { ... }
+            //new ResultEnergyData{ ... },
+            //new ResultEnergyData { ... }
 
         };
             var builder = new DataReportBuilder(products);
@@ -26,7 +27,7 @@ namespace builderReport
             director.BuildReport();
             var report = builder.GetReport();
 
-            PdfWriter writer = new PdfWriter("C:\Report.pdf");
+            PdfWriter writer = new PdfWriter(@"C:\Report.pdf");
             PdfDocument pdfreport = new PdfDocument(writer);
             Document document = new Document(pdfreport);
             Paragraph header = new Paragraph("Report").SetTextAlignment(TextAlignment.CENTER).SetFontSize(14);
