@@ -46,22 +46,21 @@ namespace REICTests
             var t1 = new DateTime(2020, 12, 31);
             var getter = new HistoricalClimateDataGetter();
 
-            var iasiPos = new GeographicalPoint(47.156944, 27.590278);
+            var pos = new GeographicalPoint(45.159444, 29.652778);//Sulina
 
-            var res = getter.GetValuesAtPoint(iasiPos, t0, t1);
+            var res = getter.GetValuesAtPoint(pos, t0, t1);
 
-            Assert.AreEqual((int)(t1 - t0).TotalDays, res.Count() + 1);
-
+            foreach (var s in res) // WindEnergyCalculator.GetWindSpeeds(res, 100, 1))
+            {
+                Console.WriteLine($"{s.DateTime}; {s.WindSpeed}");
+            }
 
             int i = 0;
 
             for (var t = t0; t <= t1; t = t.AddDays(1))
             {
                 Assert.AreEqual($"{t.Month:00}/{t.Day:00}/{t.Year:0000}", res[i].DateTime);
-            }
-
-            Assert.IsNotNull(res);
-            
+            }            
         }
         
         [TestMethod]

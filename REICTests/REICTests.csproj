@@ -143,9 +143,8 @@
     <Compile Include="Tests\Helpers\TestModelHelper.cs" />
     <Compile Include="Tests\Models\InputSolarDataModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HistoricalClimateDataGetterTest.cs" />
-    <Compile Include="WindEnergyControllerTest .cs" />
-    <Compile Include="SolarEnergyControllerTest.cs" />
+    <Compile Include="Tests\Utils\WindProbabilityDistributionTests.cs" />
+    <Compile Include="Tests\Utils\HistoricalClimateDataGetterTest.cs" />
     <Compile Include="Tests\Controllers\WindEnergyControllerTest .cs" />
     <Compile Include="Tests\Controllers\SolarEnergyControllerTest.cs" />
   </ItemGroup>

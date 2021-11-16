@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 namespace REIC
 {
-    class WindEnergyCalculator : EnergyCalculator
+    public class WindEnergyCalculator : EnergyCalculator
     {
         WindProbabilityDistribution windDistribution;
 
@@ -14,7 +15,7 @@ namespace REIC
         public WindEnergyCalculator()
         {
         }
-
+        [FunctionEntryLoggerAspect]
         public override ResultEnergyData Calculate()
         {
             // ...

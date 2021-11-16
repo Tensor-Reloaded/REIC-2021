@@ -16,6 +16,8 @@ namespace REIC
         {
 
         }
+
+
         public List<HistoricalClimateSample> GetValuesAtPoint(GeographicalPoint point)
         {
             return GetValuesAtPoint(point, new DateTime(2020, 1, 1), new DateTime(2020, 12, 31));

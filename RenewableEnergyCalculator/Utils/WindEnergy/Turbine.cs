@@ -5,7 +5,7 @@ namespace REIC
    
 
     /// Contains data about a specific wind turbine model
-    class Turbine
+    public class Turbine
     {
         /// The distance from the ground to the turbine blades. In meters.
         public float HubHeight { get; }

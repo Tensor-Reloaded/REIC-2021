@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenewableEnergyCalculator",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REICTests", "REICTests\REICTests.csproj", "{BABC43F7-CA8D-4EFF-9603-2F897C61995E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{A78E8DD4-E953-4FD0-82D9-AABECDD6FE64}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E297AF3D-BAD4-4C3F-8208-CCDE478CB0B0} = {E297AF3D-BAD4-4C3F-8208-CCDE478CB0B0}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,10 @@ Global
 		{BABC43F7-CA8D-4EFF-9603-2F897C61995E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BABC43F7-CA8D-4EFF-9603-2F897C61995E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BABC43F7-CA8D-4EFF-9603-2F897C61995E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A78E8DD4-E953-4FD0-82D9-AABECDD6FE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A78E8DD4-E953-4FD0-82D9-AABECDD6FE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A78E8DD4-E953-4FD0-82D9-AABECDD6FE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A78E8DD4-E953-4FD0-82D9-AABECDD6FE64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
