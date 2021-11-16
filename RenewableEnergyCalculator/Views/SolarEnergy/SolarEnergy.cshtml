@@ -1,37 +1,4 @@
-﻿@{
-    ViewBag.Title = "Solar Energy";
-}
-
-<head>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-    <style>
-
-        /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-        #map {
-            height: 100%;
-        }
-
-        /* Optional: Makes the sample page fill the window. */
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-
-    <script type="text/javascript">
-        let map;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8,
-            });
-        }</script>
-</head>
+﻿@model IEnumerable<RenewableEnergyCalculator.Models.Panel>
 
 <div class="wf-section">
     <div class="introheader cc-subpage">
@@ -41,126 +8,110 @@
     </div>
 </div>
 <div class="section cc-store-home-wrap">
-    <div data-current="Tab 1" data-easing="ease-in-out" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
-        <div class="tabsmenu w-tab-menu">
-            <a data-w-tab="Tab 1" class="tablink-tab-1 w-inline-block w-tab-link w--current">
-                <div class="text-block">Adress</div>
-            </a>
-            <a data-w-tab="Tab 2" class="tablink-tab-2 w-inline-block w-tab-link">
-                <div>Dimensiuni</div>
-            </a>
-            <a data-w-tab="Tab 3" class="tablink-tab-3 w-inline-block w-tab-link">
-                <div>Tipul panoului</div>
-            </a>
-            <a data-w-tab="Tab 4" class="tablink-tab-4 w-inline-block w-tab-link">
-                <div>Consumul de energie</div>
-            </a>
-            <a data-w-tab="Tab 5" class="tablink-tab-5 w-inline-block w-tab-link">
-                <div>Rezultate</div>
-            </a>
-        </div>
-        <div class="tabs-content w-tab-content">
-            <div data-w-tab="Tab 1" class="tab-pane-tab-1 w-tab-pane w--tab-active">
-                <div class="columns w-row">
-                    <div class="column w-col w-col-6">
-                        <div id="map" data-widget-latlng="" data-widget-tooltip="" data-widget-zoom="12" data-widget-style="roadmap" data-enable-scroll="true" data-enable-touch="true" class="map-2 w-widget w-widget-map">
 
-                        </div>
+    <form id="regForm" method="post" action="@Url.Action("InputData", "SolarEnergy")">
+
+        <!-- Steps of the form: -->
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
+            <span class="step">Address</span>
+            <span class="step">Dimensions</span>
+            <span class="step">Panel Type</span>
+            <span class="step">Energy Consumption</span>
+        </div>
+
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <div id="map"></div>
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="center">
+                        <label for="Address">Enter a location: </label>
+                        <input type="text" class="input w-input" maxlength="256" name="Address" id="searchTextField" autocomplete="on" required>
+                        <input type="hidden" id="Address" name="Address" />
+                        <input type="hidden" id="Lat" name="Lat" />
+                        <input type="hidden" id="Lng" name="Lng" />
                     </div>
-                    <div class="column w-col w-col-6">
-                        <div class="w-form">
-                            <form id="wf-form-FormAdress" name="wf-form-FormAdress" data-name="FormAdress" class="oneinputform"><label for="name" class="field-label">Alege un punct pe harta sau introdu adresa</label><input type="text" class="input w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"><input type="submit" value="Continua" data-wait="Please wait..." class="submit-button w-button"></form>
-                            <div class="w-form-done">
-                                <div>Thank you! Your submission has been received!</div>
-                            </div>
-                            <div class="w-form-fail">
-                                <div>Oops! Something went wrong while submitting the form.</div>
-                            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <img width="518" sizes="(max-width: 479px) 100vw, (max-width: 767px) 89vw, 45vw" src="~/Content/images/unnamed-p-500.png" srcset="~/Content/images/unnamed-p-500.png 500w, ~/Content/images/unnamed.png 600w" alt="" class="image">
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="center">
+                        <div>
+                            <label for="Area" class="field-label">Area (m2):</label>
+                            <input type="text" class="input w-input" maxlength="256" name="Area" placeholder="" required>
+                            <label for="Slope" class="field-label">Slope (0-45):</label>
+                            <input type="text" class="input w-input" maxlength="256" name="Slope" placeholder="">
+                            <label for="Orientation" class="field-label">Orientation (N, S):</label>
+                            <select id="orientation" name="Orientation" class="w-select">
+                                <option value="">Select orientation...</option>
+                                <option value="N">N</option>
+                                <option value="S">S</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <div data-w-tab="Tab 2" class="tab-pane-tab-2 w-tab-pane">
-                <div class="w-row">
-                    <div class="column w-col w-col-6"><img width="518" sizes="(max-width: 479px) 100vw, (max-width: 767px) 89vw, 45vw" src="images/unnamed.png" loading="lazy" srcset="images/unnamed-p-500.png 500w, images/unnamed.png 600w" alt="" class="image"></div>
-                    <div class="column w-col w-col-6">
-                        <div class="w-form">
-                            <form id="wf-form-FormAdress" name="wf-form-FormAdress" data-name="FormAdress" class="threeinputform"><label for="name-2" class="field-label">dimensiunea acoperisului (in m2):</label><input type="text" class="input w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"><label for="name-3" class="field-label">Inclinarea acoperisului (0-45):</label><input type="text" class="input w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"><label for="name-3" class="field-label">Orientarea acoperisului (N, Nv, v, Sv, S, SE, E, NE, N):</label><input type="text" class="input w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"><input type="submit" value="Continua" data-wait="Please wait..." class="submit-button w-button"></form>
-                            <div class="w-form-done">
-                                <div>Thank you! Your submission has been received!</div>
-                            </div>
-                            <div class="w-form-fail">
-                                <div>Oops! Something went wrong while submitting the form.</div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+
+
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <img width="637" sizes="(max-width: 479px) 100vw, (max-width: 767px) 91vw, 45vw" src="~/Content/images/p15_123.jpg" loading="lazy" srcset="~/Content/images/p15_123-p-500.jpeg 500w, ~/Content/images/p15_123.jpg 719w" alt="" class="pvcellsimage">
                 </div>
-            </div>
-            <div data-w-tab="Tab 3" class="tab-pane-tab-3 w-tab-pane">
-                <div class="w-row">
-                    <div class="column w-col w-col-6"><img width="637" sizes="(max-width: 479px) 100vw, (max-width: 767px) 91vw, 45vw" src="images/p15_123.jpg" loading="lazy" srcset="images/p15_123-p-500.jpeg 500w, images/p15_123.jpg 719w" alt="" class="pvcellsimage"></div>
-                    <div class="column w-col w-col-6">
-                        <div class="w-form">
-                            <form id="wf-form-FormAdress" name="wf-form-FormAdress" data-name="FormAdress" class="oneinputform">
-                                <label for="name-3" class="field-label">Tipul panoului</label><select id="field" name="field" class="w-select">
-                                    <option value="">Select one...</option>
-                                    <option value="First">First Choice</option>
-                                    <option value="Second">Second Choice</option>
-                                    <option value="Third">Third Choice</option>
-                                </select><input type="submit" value="Continua" data-wait="Please wait..." class="submit-button w-button">
-                            </form>
-                            <div class="w-form-done">
-                                <div>Thank you! Your submission has been received!</div>
-                            </div>
-                            <div class="w-form-fail">
-                                <div>Oops! Something went wrong while submitting the form.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div data-w-tab="Tab 4" class="tab-pane-tab-4 w-tab-pane">
-                <div class="columns-2 w-row">
-                    <div class="column w-col w-col-6"><img width="726" sizes="(max-width: 479px) 100vw, (max-width: 767px) 93vw, 45vw" src="images/Total-monthly-energy-use-for-large-office.png" loading="lazy" srcset="images/Total-monthly-energy-use-for-large-office-p-500.png 500w, images/Total-monthly-energy-use-for-large-office-p-800.png 800w, images/Total-monthly-energy-use-for-large-office.png 850w" alt="" class="image"></div>
-                    <div class="column w-col w-col-6">
-                        <div class="w-form">
-                            <form id="wf-form-FormAdress" name="wf-form-FormAdress" data-name="FormAdress" class="threeinputform">
-                                <label for="name-3" class="field-label">valuta:</label><select id="field-4" name="field-4" class="w-select">
-                                    <option value="">RON</option>
-                                    <option value="First">First Choice</option>
-                                    <option value="Second">Second Choice</option>
-                                    <option value="Third">Third Choice</option>
-                                </select><label for="name-3" class="field-label">Consumul anual de energie:</label><input type="text" class="input w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" id="field-2" required=""><label>pretul pentru curentul electric</label><input type="text" class="input w-input" maxlength="256" name="field-3" data-name="Field 3" placeholder="Example Text" id="field-3" required=""><input type="submit" value="Continua" data-wait="Please wait..." class="submit-button w-button">
-                            </form>
-                            <div class="w-form-done">
-                                <div>Thank you! Your submission has been received!</div>
-                            </div>
-                            <div class="w-form-fail">
-                                <div>Oops! Something went wrong while submitting the form.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div data-w-tab="Tab 5" class="tab-pane-tab-5 w-tab-pane">
-                <div class="columns-2 w-row">
-                    <div class="column w-col w-col-6"><img width="385" loading="lazy" src="images/download.png" alt="" class="image"></div>
-                    <div class="column w-col w-col-6"><img width="385" loading="lazy" src="images/download.png" alt="" class="image"></div>
-                </div>
-                <div class="w-container">
+                <div class="column w-col w-col-6">
                     <div class="w-form">
-                        <form id="wf-form-FormAdress" name="wf-form-FormAdress" data-name="FormAdress" class="emailform"><label for="name-3" class="emaillabel">Introduceti email-ul pentru a primi rezultatele</label><input type="text" class="emailnput w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" id="field-2" required=""><input type="submit" value="Trimite" data-wait="Please wait..." class="submitemail w-button"></form>
-                        <div class="w-form-done">
-                            <div>Thank you! Your submission has been received!</div>
-                        </div>
-                        <div class="w-form-fail">
-                            <div>Oops! Something went wrong while submitting the form.</div>
-                        </div>
+                        <label for="PanelType" class="field-label">Panel type</label>
+                        <select id="paneltype" name="PanelType" class="w-select">
+                            <option value="">Select one...</option>
+                            @foreach (var panel in Model)
+                            {
+                        <option value="@Html.DisplayFor(m=>panel.Id)">@Html.DisplayFor(m => panel.Model) (@Html.DisplayFor(m => panel.Manufacturer))</option>
+                            }
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTofcTbMd3_q3bmgPVzfkd6Qfm4VNnvQ4&callback=initMap&v=weekly" async></script>
+
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <img width="637" sizes="(max-width: 479px) 100vw, (max-width: 767px) 91vw, 45vw" src="~/Content/images/p15_123.jpg" loading="lazy" srcset="~/Content/images/p15_123-p-500.jpeg 500w, ~/Content/images/p15_123.jpg 719w" alt="" class="pvcellsimage">
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="w-form">
+                        <label for="Currency" class="field-label">Currency</label>
+                        <select name="Currency" class="w-select">
+                            <option value="">Select currency...</option>
+                            <option value="RON">RON</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                        <label for="AnnualEnConsumption" class="field-label">Annual energy consumption:</label>
+                        <input type="text" class="input w-input" maxlength="256" name="AnnualEnConsumption" placeholder="">
+                        <label for="AnnualElPrice" class="field-label">Electricity price:</label>
+                        <input type="text" class="input w-input" maxlength="256" name="AnnualElPrice" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </div>
+
+    </form>
+</div>
