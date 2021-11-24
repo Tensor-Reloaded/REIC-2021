@@ -1,18 +1,23 @@
-﻿using MimeKit;
-using System.Collections.Generic;
-using System;
+﻿/// ////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FileName: Mail.cs
+//FileType: Visual C# Source file
+//Author: Barbu Alexandru
+//Description: Class that models the mail client used for sending the e-mail.
+//////////////////////////////////////////////////////////////////////////////////////
 
+using System;
+using System.IO;
+using MimeKit;
 
 namespace MailSystem
 {
-    class Mail
+    public class Mail
     {
-        private Sender _sender = Sender.GetInstance();
+        private readonly Sender _sender = Sender.GetInstance();
         private Recepient _recepient;
 
-        private MimeMessage _message;
-        private BodyBuilder _body;
-        private List<string> attachements = new List<string>();
+        private readonly MimeMessage _message;
+        private readonly BodyBuilder _body;
 
         private SMTPClient _mailClient;
 
@@ -23,39 +28,89 @@ namespace MailSystem
 
             _message.From.Add(new MailboxAddress(_sender.getName(), _sender.getEmailAddress()));
 
-            _message.Subject = System.IO.File.ReadAllText(@"C:\Users\shank\source\repos\MailSystem\EmailSubject.txt");
+            _body = new BodyBuilder();
         }
 
 
-        public void setRecepient(Recepient recepient)
+        public bool TrySetRecipient(Recepient recepient)
         {
             _recepient = recepient;
-            _message.To.Add(MailboxAddress.Parse(_recepient.getEmailAddress()));
-        }
-
-        public void addAtachement(String pathToAtachementFile)
-        {
-            attachements.Add(pathToAtachementFile);
-        }
-
-
-        private void composeBody()
-        {
-            _body = new BodyBuilder();
-            _body.TextBody = System.IO.File.ReadAllText(@"C:\Users\shank\source\repos\MailSystem\EmailBody.txt");
-
-            foreach (String attachement in attachements)
+            try
             {
-                _body.Attachments.Add(attachement);
+                _message.To.Add(MailboxAddress.Parse(_recepient.getEmailAddress()));
+                return true;
             }
-
-            _message.Body = _body.ToMessageBody();
+            catch (ParseException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public void sendMail()
+        public bool TrySetSubject()
         {
-            composeBody();
+            try
+            {
+                _message.Subject = System.IO.File.ReadAllText(@"C:\Users\shank\source\repos\MailSystem\EmailSubject.txt");
+                return true;
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
 
+        public bool TrySetSubject(string subject)
+        {
+            if (subject == "")
+                return false;
+
+            _message.Subject = subject;
+            return true;
+        }
+
+        public bool TrySetBody()
+        {
+            try
+            {
+                _body.TextBody = System.IO.File.ReadAllText(@"C:\Users\shank\source\repos\MailSystem\EmailBody.txt");
+                return true;
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public bool TrySetBody(string body)
+        {
+            if (body == "")
+                return false;
+
+            _body.TextBody = body;
+            return true;
+        }
+
+        public bool TryAddAtachement(string pathToAttachement)
+        {
+            try
+            {
+                Path.GetFullPath(pathToAttachement);
+                _body.Attachments.Add(pathToAttachement);
+                return true;
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public bool TrySendEmail()
+        {
+            _message.Body = _body.ToMessageBody();
             _mailClient = new SMTPClient();
 
             try
@@ -70,6 +125,7 @@ namespace MailSystem
             {
 
                 Console.WriteLine(ex.Message);
+                return false;
             }
             finally
             {
@@ -77,6 +133,8 @@ namespace MailSystem
                 _mailClient.server.Dispose();
             }
 
+            return true;
         }
+
     }
 }
