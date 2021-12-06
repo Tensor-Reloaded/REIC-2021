@@ -16,5 +16,13 @@ namespace REIC
         // eg.
         // bool IsSuitable;
         // string NotSuitableReason;
+
+        public ResultWindEnergyData(double yearlyEnergyProduced, Turbine turbine,
+                List<GeographicalPoint> turbineLocation)
+        {
+            this.YearlyEnergyProduced = yearlyEnergyProduced;
+            this.Turbine = turbine;
+            this.TurbineLocation = turbineLocation;
+        }
     }
 }

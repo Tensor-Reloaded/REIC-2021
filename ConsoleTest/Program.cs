@@ -1,5 +1,6 @@
 ﻿using REIC;
 using System.Collections.Generic;
+using System;
 
 static class Program
 {
@@ -32,10 +33,22 @@ static class Program
             turbineHeight: 100, //100m 
             roughnessLength: 0.0002);//calm sea surface
 
-        var turbine = new Turbine(100, 0, 50, null);
+        Console.WriteLine($"k {prob.K}; c {prob.C}");
+
+        var powerCurve = new PowerCurve(new List<Tuple<double, double>>() {
+            new Tuple<double, double>(5, 0),
+            new Tuple<double, double>(25, 5),
+        });
+        //TODO efficientz (in %
+        var turbine = new Turbine(
+            hubHeight: 100,
+            cutInSpeed: 4,
+            cutOutSpeed: 25, powerCurve);
 
         var cal = new WindEnergyCalculator(prob, turbine, 10);
 
         var res = cal.Calculate();
+
+        Console.WriteLine($"res: {res.YearlyEnergyProduced}");
     }
 }

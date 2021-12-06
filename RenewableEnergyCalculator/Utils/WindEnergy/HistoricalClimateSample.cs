@@ -35,6 +35,8 @@ namespace REIC
         internal double? _snowDepth;
         /// In cm
         public double SnowDepth => _snowDepth ?? 0;
+
+
         /// In km/h; speed at 10m above ground
         public double WindSpeed { get; set; }
 
