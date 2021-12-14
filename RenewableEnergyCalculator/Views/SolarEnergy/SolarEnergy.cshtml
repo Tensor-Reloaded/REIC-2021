@@ -1,0 +1,117 @@
+﻿@model IEnumerable<RenewableEnergyCalculator.Models.Panel>
+
+<div class="wf-section">
+    <div class="introheader cc-subpage">
+        <div class="intro-content">
+            <div class="introtitle">Solar Energy Investment Calculator<br></div>
+        </div>
+    </div>
+</div>
+<div class="section cc-store-home-wrap">
+
+    <form id="regForm" method="post" action="@Url.Action("InputData", "SolarEnergy")">
+
+        <!-- Steps of the form: -->
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
+            <span class="step">Address</span>
+            <span class="step">Dimensions</span>
+            <span class="step">Panel Type</span>
+            <span class="step">Energy Consumption</span>
+        </div>
+
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <div id="map"></div>
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="center">
+                        <label for="Address">Enter a location: </label>
+                        <input type="text" class="input w-input" maxlength="256" name="Address" id="searchTextField" autocomplete="on" required>
+                        <input type="hidden" id="Address" name="Address" />
+                        <input type="hidden" id="Lat" name="Lat" />
+                        <input type="hidden" id="Lng" name="Lng" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <img width="518" sizes="(max-width: 479px) 100vw, (max-width: 767px) 89vw, 45vw" src="~/Content/images/unnamed-p-500.png" srcset="~/Content/images/unnamed-p-500.png 500w, ~/Content/images/unnamed.png 600w" alt="" class="image">
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="center">
+                        <div>
+                            <label for="Area" class="field-label">Area (m2):</label>
+                            <input type="text" class="input w-input" maxlength="256" name="Area" placeholder="" required>
+                            <label for="Slope" class="field-label">Slope (0-45):</label>
+                            <input type="text" class="input w-input" maxlength="256" name="Slope" placeholder="">
+                            <label for="Orientation" class="field-label">Orientation (N, S):</label>
+                            <select id="orientation" name="Orientation" class="w-select">
+                                <option value="">Select orientation...</option>
+                                <option value="N">N</option>
+                                <option value="S">S</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <img width="637" sizes="(max-width: 479px) 100vw, (max-width: 767px) 91vw, 45vw" src="~/Content/images/p15_123.jpg" loading="lazy" srcset="~/Content/images/p15_123-p-500.jpeg 500w, ~/Content/images/p15_123.jpg 719w" alt="" class="pvcellsimage">
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="w-form">
+                        <label for="PanelType" class="field-label">Panel type</label>
+                        <select id="paneltype" name="PanelType" class="w-select">
+                            <option value="">Select one...</option>
+                            @foreach (var panel in Model)
+                            {
+                        <option value="@Html.DisplayFor(m=>panel.Id)">@Html.DisplayFor(m => panel.Model) (@Html.DisplayFor(m => panel.Manufacturer))</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab">
+            <div class="columns w-row">
+                <div class="column w-col w-col-6">
+                    <img width="637" sizes="(max-width: 479px) 100vw, (max-width: 767px) 91vw, 45vw" src="~/Content/images/p15_123.jpg" loading="lazy" srcset="~/Content/images/p15_123-p-500.jpeg 500w, ~/Content/images/p15_123.jpg 719w" alt="" class="pvcellsimage">
+                </div>
+                <div class="column w-col w-col-6">
+                    <div class="w-form">
+                        <label for="Currency" class="field-label">Currency</label>
+                        <select name="Currency" class="w-select">
+                            <option value="">Select currency...</option>
+                            <option value="RON">RON</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                        <label for="AnnualEnConsumption" class="field-label">Annual energy consumption:</label>
+                        <input type="text" class="input w-input" maxlength="256" name="AnnualEnConsumption" placeholder="">
+                        <label for="AnnualElPrice" class="field-label">Electricity price:</label>
+                        <input type="text" class="input w-input" maxlength="256" name="AnnualElPrice" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </div>
+
+    </form>
+</div>

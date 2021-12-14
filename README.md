@@ -34,7 +34,7 @@ Colab. Simionescu Cristian
 [REIC-State of Art](https://docs.google.com/document/d/1ipdTFoNUxRb2QHOWcSKvm-sowuk8P5Al0WfxBCtT5Ho/edit?usp=sharing)
 
 ## Requirements and diagrams:
-[REIC-Requirements](https://docs.google.com/document/d/1-rmfZce7hg5LEKqbWaxynpGvl54-3VnXNuiyeggAqEk/edit?usp=sharing)
+[REIC-Requirements & Diagrams](https://docs.google.com/document/d/1-rmfZce7hg5LEKqbWaxynpGvl54-3VnXNuiyeggAqEk/edit?usp=sharing)
 
 ## Solar and Wind data:
 [Data](https://docs.google.com/document/d/1wUx4Ua6Q5ShfvlU6a1JfnloDiBp3mIJ-D3hu71P_lLE/edit?usp=sharing)
