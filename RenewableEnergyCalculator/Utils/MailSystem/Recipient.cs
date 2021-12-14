@@ -10,9 +10,9 @@ namespace MailSystem
     public class Recepient
     {
         // default name of the recipient
-        private string _name = "Alex B.";
+        private string _name = "Teo";
         // default address of the recipient
-        private string _emailAddress = "barbugalexandru@gmail.com";
+        private string _emailAddress = "teodora.hoamea@gmail.com";
 
         public Recepient(string name, string emailAddress)
         {

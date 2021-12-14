@@ -13,9 +13,9 @@ namespace MailSystem
 
             Mail mail = new Mail();
 
-            Recepient recipient = new Recepient("Alex", "barbualexandru14@yahoo.com");
+            //Recepient recipient = new Recepient("Alex", "barbualexandru14@yahoo.com");
 
-            mail.TrySetRecipient(recipient);
+            //mail.TrySetRecipient(recipient);
 
             mail.TrySetSubject();
 
