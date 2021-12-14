@@ -420,11 +420,6 @@
     <Compile Include="Utils\MailSystem\Recipient.cs" />
     <Compile Include="Utils\MailSystem\Sender.cs" />
     <Compile Include="Utils\MailSystem\SMTPClient.cs" />
-    <Compile Include="Utils\Reports\BuilderReport\DataReport.cs" />
-    <Compile Include="Utils\Reports\BuilderReport\DataReportBuilder.cs" />
-    <Compile Include="Utils\Reports\BuilderReport\DataReportDirector.cs" />
-    <Compile Include="Utils\Reports\BuilderReport\Generate.cs" />
-    <Compile Include="Utils\Reports\BuilderReport\IDataReportBuilder.cs" />
     <Compile Include="Utils\Reports\EnergyCalculator.cs" />
     <Compile Include="Utils\Reports\ExceptionAspect.cs" />
     <Compile Include="Utils\Reports\chart.cs">
@@ -433,6 +428,7 @@
     <Compile Include="Utils\Reports\chart.designer.cs">
       <DependentUpon>chart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Reports\generatePdf.cs" />
     <Compile Include="Utils\Reports\gmap.cs">
       <SubType>Form</SubType>
     </Compile>
