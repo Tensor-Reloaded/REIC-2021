@@ -405,11 +405,11 @@
     <Compile Include="Utils\Reports\BuilderReport\IDataReportBuilder.cs" />
     <Compile Include="Utils\Reports\EnergyCalculator.cs" />
     <Compile Include="Utils\Reports\ExceptionAspect.cs" />
-    <Compile Include="Utils\Reports\Form1.cs">
+    <Compile Include="Utils\Reports\chart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utils\Reports\Form1.designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Utils\Reports\chart.designer.cs">
+      <DependentUpon>chart.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Reports\LogAspect.cs" />
     <Compile Include="Utils\SolarEnergy\FacadeDesignPattern\Facade.cs" />
@@ -527,8 +527,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Utils\Reports\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Utils\Reports\chart.resx">
+      <DependentUpon>chart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

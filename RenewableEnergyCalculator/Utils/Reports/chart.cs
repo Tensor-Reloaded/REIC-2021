@@ -15,9 +15,9 @@ using REIC;
 
 namespace chart
 {
-    public partial class Form1 : Form
+    public partial class chart : Form
     {
-        public Form1()
+        public chart()
         {
             InitializeComponent();
         }

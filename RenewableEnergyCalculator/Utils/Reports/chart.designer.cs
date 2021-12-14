@@ -1,6 +1,6 @@
 ﻿namespace chart
 {
-    partial class Form1
+    partial class chart
     {
         /// <summary>
         /// Required designer variable.
@@ -53,14 +53,14 @@
             this.report.Text = "Report";
             this.report.Click += new System.EventHandler(this.report_Click);
             // 
-            // Form1
+            // chart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.report);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "chart";
+            this.Text = "chart";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.report)).EndInit();
             this.ResumeLayout(false);
