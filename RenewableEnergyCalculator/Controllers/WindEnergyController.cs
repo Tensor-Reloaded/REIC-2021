@@ -6,6 +6,12 @@ using System.Web.Mvc;
 
 namespace RenewableEnergyCalculator.Controllers
 {
+    //////////////////////////////////////////////////////////////////////////////////////////
+    // FileName: SolarEnergyController.cs
+    // Author : Vasilita Irina
+    // Description : This controller contains the flow control logic for the WindEnergy view 
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
     public class WindEnergyController : Controller
     {
         // GET: WindEnergy

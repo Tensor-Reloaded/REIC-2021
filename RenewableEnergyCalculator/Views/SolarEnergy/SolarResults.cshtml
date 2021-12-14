@@ -1,14 +1,154 @@
-﻿
-<h2>Results</h2>
-<h4 style="color:purple">
+﻿<div class="wf-section">
+    <div class="introheader cc-subpage">
+        <div class="intro-content">
+            <div class="introtitle">Results<br></div>
+        </div>
+    </div>
+</div>
 
-    <b>Message:</b>    @ViewBag.Message <br />
-    <b>Address:</b>    @ViewBag.Address <br />
-    <b>Area:</b>    @ViewBag.Area <br />
-    <b>Slope:</b>    @ViewBag.Slope <br />
-    <b>Orientation:</b>    @ViewBag.Orientation <br />
-    <b>Panel type:</b>    @ViewBag.PanelType <br />
-    <b>Currency:</b>    @ViewBag.Currency <br />
-    <b>Annual energy consumption:</b>    @ViewBag.AnnualEnConsumption <br />
-    <b>Electricity price:</b>    @ViewBag.AnnualElPrice <br />
-</h4>
+
+<div class="section cc-store-home-wrap">
+    <h2 style="text-align: center">Solar Energy Output</h2>
+    <div class="columns w-row">
+        <div class="column w-col w-col-6" style="text-align:center; padding-top: 50px;">
+            <canvas class="solarChartcanvas" id="solarChart" style="width:100%; max-width:700px"></canvas>
+        </div>
+        <div class="column w-col w-col-6">
+            <table>
+                <tr>
+                    <td>Location:</td>
+                    <td>@ViewBag.Location</td>
+                </tr>
+                <tr>
+                    <td>Roof width:</td>
+                    <td>@ViewBag.RoofWidth m&#178</td>
+                </tr>
+                <tr>
+                    <td>Roof Length:</td>
+                    <td>@ViewBag.RoofLength m&#178</td>
+                </tr>
+                <tr>
+                    <td>Slope (Tilt):</td>
+                    <td>@ViewBag.Slope &#176</td>
+                </tr>
+                <tr>
+                    <td>Orientation (Hemisphere):</td>
+                    <td>@ViewBag.Orientation</td>
+                </tr>
+                <tr>
+                    <td>Panel:</td>
+                    <td>@ViewBag.Panel</td>
+                </tr>
+                <tr>
+                    <td>Panel Efficiency:</td>
+                    <td>@ViewBag.PanelEfficieny %</td>
+                </tr>
+                <tr>
+                    <td>Panel Area:</td>
+                    <td>@ViewBag.PanelArea  m&#178</td>
+                </tr>
+                <tr>
+                    <td>Panel Type:</td>
+                    <td>@ViewBag.PanelType</td>
+                </tr>
+                <tr>
+                    <td> <b>Solar Energy Output: </b></td>
+                    <td><b>@ViewBag.AnnualEnergy kWh</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="section cc-store-home-wrap">
+    <h2 style="text-align: center">Wind Energy Output</h2>
+    <div class="columns w-row">
+        <div class="column w-col w-col-6" style="text-align:center; padding-top: 50px;">
+            <canvas class="solarChartcanvas" id="solarChart" style="width:100%; max-width:700px"></canvas>
+        </div>
+        <div class="column w-col w-col-6">
+            <table>
+                <tr>
+                    <td>Location:</td>
+                    <td>@ViewBag.Location</td>
+                </tr>
+                <tr>
+                    <td>Roof width:</td>
+                    <td>@ViewBag.RoofWidth m&#178</td>
+                </tr>
+                <tr>
+                    <td>Roof Length:</td>
+                    <td>@ViewBag.RoofLength m&#178</td>
+                </tr>
+                <tr>
+                    <td>Slope (Tilt):</td>
+                    <td>@ViewBag.Slope &#176</td>
+                </tr>
+                <tr>
+                    <td>Orientation (Hemisphere):</td>
+                    <td>@ViewBag.Orientation</td>
+                </tr>
+                <tr>
+                    <td>Panel:</td>
+                    <td>@ViewBag.Panel</td>
+                </tr>
+                <tr>
+                    <td>Panel Efficiency:</td>
+                    <td>@ViewBag.PanelEfficieny %</td>
+                </tr>
+                <tr>
+                    <td>Panel Area:</td>
+                    <td>@ViewBag.PanelArea  m&#178</td>
+                </tr>
+                <tr>
+                    <td>Panel Type:</td>
+                    <td>@ViewBag.PanelType</td>
+                </tr>
+                <tr>
+                    <td> <b>Solar Energy Output: </b></td>
+                    <td><b>@ViewBag.AnnualEnergy kWh</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="section cc-store-home-wrap">
+    <form>
+        <div class="center">
+            <label for="Email">Enter your email:</label>
+            <input type="email" class="input w-input" id="email" name="Email" required>
+            <input type="hidden" value=@ViewBag.Energy name="info" />
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var xValues = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var energies = @Html.Raw(Json.Encode(@ViewBag.MonthlyEnergyArray));
+    var yValues = [];
+
+    for (var i in energies)
+        yValues.push([i, energies[i]]);
+
+    new Chart("solarChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: "brown",
+                data: yValues
+            }]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "Monthly Solar Energy Output"
+            }
+        }
+    });
+</script>

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
+using PostSharp.Patterns.Diagnostics;
+using PostSharp.Patterns.Diagnostics.Backends.NLog;
 
 namespace RenewableEnergyCalculator.Controllers
 {
@@ -11,6 +11,26 @@ namespace RenewableEnergyCalculator.Controllers
     {
         public ActionResult Index()
         {
+            #region Logging Configuration
+
+            var nlogConfig = new LoggingConfiguration();
+
+            var fileTarget = new FileTarget("file") {
+                FileName = "RenewableEnergyTrace.log",
+                KeepFileOpen = true,
+                ConcurrentWrites = false,
+            };
+
+            nlogConfig.AddTarget(fileTarget);
+            nlogConfig.LoggingRules.Add(new LoggingRule("*", NLog.LogLevel.Debug, fileTarget));
+
+            LogManager.EnableLogging();
+
+            // Configure PostSharp Logging to use NLog.
+            LoggingServices.DefaultBackend = new NLogLoggingBackend(new LogFactory(nlogConfig));
+
+            #endregion
+
             return View("About");
         }
 

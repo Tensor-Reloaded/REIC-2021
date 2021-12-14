@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RenewableEnergyCalculator.Models.Panel>
+﻿@model  RenewableEnergyCalculator.Controllers.SolarEnergyController.ViewModel
 
 <div class="wf-section">
     <div class="introheader cc-subpage">
@@ -45,9 +45,11 @@
                 <div class="column w-col w-col-6">
                     <div class="center">
                         <div>
-                            <label for="Area" class="field-label">Area (m2):</label>
-                            <input type="text" class="input w-input" maxlength="256" name="Area" placeholder="" required>
-                            <label for="Slope" class="field-label">Slope (0-45):</label>
+                            <label for="Width" class="field-label">Width of your roof (m2):</label>
+                            <input type="text" class="input w-input" maxlength="256" name="Width" placeholder="" required>
+                            <label for="Length" class="field-label">Length of your roof (m2):</label>
+                            <input type="text" class="input w-input" maxlength="256" name="Length" placeholder="" required>
+                            <label for="Slope" class="field-label">Slope (0-90):</label>
                             <input type="text" class="input w-input" maxlength="256" name="Slope" placeholder="">
                             <label for="Orientation" class="field-label">Orientation (N, S):</label>
                             <select id="orientation" name="Orientation" class="w-select">
@@ -69,12 +71,23 @@
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="w-form">
+                        Select an existing panel or choose the panel type.
+                        <br />
+                        <label for="Panel" class="field-label">Panel</label>
+                        <select id="panel" name="Panel" class="w-select">
+                            <option value="0">Select one...</option>
+                            @foreach (var panel in Model.Panels)
+                            {
+                                <option value="@Html.DisplayFor(m=>panel.Id)">@Html.DisplayFor(m => panel.Model) (@Html.DisplayFor(m => panel.Manufacturer))</option>
+                            }
+                        </select>
+
                         <label for="PanelType" class="field-label">Panel type</label>
                         <select id="paneltype" name="PanelType" class="w-select">
-                            <option value="">Select one...</option>
-                            @foreach (var panel in Model)
+                            <option value="0">Select one...</option>
+                            @foreach (var panelType in Model.PanelTypes)
                             {
-                        <option value="@Html.DisplayFor(m=>panel.Id)">@Html.DisplayFor(m => panel.Model) (@Html.DisplayFor(m => panel.Manufacturer))</option>
+                                <option value="@Html.DisplayFor(m=>panelType.Id)">@Html.DisplayFor(m => panelType.PType) </option>
                             }
                         </select>
                     </div>
