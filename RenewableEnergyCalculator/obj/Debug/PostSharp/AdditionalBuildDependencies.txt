@@ -1,2 +1,0 @@
-C:\ProgramData\PostSharp\6.10.4\bin.Release\net472\PostSharp.Compiler.Engine.dll
-D:\Master-UAIC\ASET\REIC\packages\PostSharp.Patterns.Diagnostics.6.10.4-rc\tools\PostSharp.Patterns.Diagnostics.Weaver.dll
