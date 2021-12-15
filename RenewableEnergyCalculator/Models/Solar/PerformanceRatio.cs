@@ -31,7 +31,7 @@ namespace RenewableEnergyCalculator.Models
         void setIrradiation(SolarRadiation radiation)
         {
             int month = DateTime.Now.Month;
-            Irr = radiation.GetMonthRadiation(month) * 10; //convert kW/m2 in MW/cm2
+            //Irr = radiation.GetMonthRadiation(month) * 10; //convert kW/m2 in MW/cm2
         }
 
         public PerformanceRatio(SolarRadiation radiation, PanelType panelType, double medTemp = 30, double NOCT = 48)

@@ -21,15 +21,15 @@
                 </tr>
                 <tr>
                     <td>Roof width:</td>
-                    <td>@ViewBag.RoofWidth m&#178</td>
+                    <td>@ViewBag.RoofWidth m</td>
                 </tr>
                 <tr>
                     <td>Roof Length:</td>
-                    <td>@ViewBag.RoofLength m&#178</td>
+                    <td>@ViewBag.RoofLength m</td>
                 </tr>
                 <tr>
                     <td>Slope (Tilt):</td>
-                    <td>@ViewBag.Slope &#176</td>
+                    <td>@ViewBag.Slope&#176</td>
                 </tr>
                 <tr>
                     <td>Orientation (Hemisphere):</td>
@@ -116,11 +116,12 @@
 </div>
 
 <div class="section cc-store-home-wrap">
-    <form>
+    <form id="emailForm" method="post" action="@Url.Action("SendEmail", "SolarEnergy")">
         <div class="center">
             <label for="Email">Enter your email:</label>
             <input type="email" class="input w-input" id="email" name="Email" required>
-            <input type="hidden" value=@ViewBag.Energy name="info" />
+            <input type="hidden" value=@ViewBag.AnnualEnergy name="info" />
+            <input id="chartS" type="hidden" name="imageURI"/>
             <button type="submit">Submit</button>
         </div>
     </form>
@@ -134,7 +135,7 @@
     for (var i in energies)
         yValues.push([i, energies[i]]);
 
-    new Chart("solarChart", {
+    chart = new Chart("solarChart", {
         type: "bar",
         data: {
             labels: xValues,
@@ -151,4 +152,10 @@
             }
         }
     });
+
+    
+    var canvas = document.getElementById("solarChart");
+    var imgURI = canvas.toDataURL();
+    document.getElementById("chartS").value = imgURI;
+
 </script>

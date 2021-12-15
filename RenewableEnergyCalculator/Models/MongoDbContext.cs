@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,8 +14,8 @@ namespace RenewableEnergyCalculator.Models
         private readonly IMongoDatabase _mongoDb;
         public MongoDbContext()
         {
-            var username = System.Configuration.ConfigurationManager.AppSettings["MongoUsername"];
-            var password = System.Configuration.ConfigurationManager.AppSettings["MongoPassword"];
+            var username = ConfigurationManager.AppSettings["MongoUsername"];
+            var password = ConfigurationManager.AppSettings["MongoPassword"];
             var settings = MongoClientSettings.FromConnectionString("mongodb+srv://"+username+":"+password+"@reic-cluster.pexjk.mongodb.net/REIC?retryWrites=true&w=majority");
             var client = new MongoClient(settings);
             _mongoDb = client.GetDatabase("REIC-DB");

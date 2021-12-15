@@ -1,0 +1,2 @@
+D:\Master-UAIC\ASET\REIC\REICTests\obj\Debug\REICTests.csproj.AssemblyReference.cache
+D:\Master-UAIC\ASET\REIC\REICTests\obj\Debug\REICTests.csproj.CoreCompileInputs.cache

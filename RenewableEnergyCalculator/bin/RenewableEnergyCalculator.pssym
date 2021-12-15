@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbols LinesOfCode="805" PostSharpLinesOfCode="0" EnhancedTypesCount="3" SchemaVersion="1" PostSharpVersion="6.10.4.0" xmlns="http://schemas.postsharp.org/2.0/symbols">
+  <Evolution Source="#1=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Id&gt;k__BackingField" Target="#2=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Id&gt;k__OriginalField" />
+  <Evolution Source="#2" Target="#3=P:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::{Id}k__BackingField()" />
+  <Evolution Source="#4=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Model&gt;k__BackingField" Target="#5=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Model&gt;k__OriginalField" />
+  <Evolution Source="#5" Target="#6=P:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::{Model}k__BackingField()" />
+  <Evolution Source="#7=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Manufacturer&gt;k__BackingField" Target="#8=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Manufacturer&gt;k__OriginalField" />
+  <Evolution Source="#8" Target="#9=P:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::{Manufacturer}k__BackingField()" />
+  <Evolution Source="#10=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Efficiency&gt;k__BackingField" Target="#11=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Efficiency&gt;k__OriginalField" />
+  <Evolution Source="#11" Target="#12=P:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::{Efficiency}k__BackingField()" />
+  <Evolution Source="#13=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Cost&gt;k__BackingField" Target="#14=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Cost&gt;k__OriginalField" />
+  <Evolution Source="#14" Target="#15=P:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::{Cost}k__BackingField()" />
+  <Evolution Source="#16=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Area&gt;k__BackingField" Target="#17=F:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::&lt;Area&gt;k__OriginalField" />
+  <Evolution Source="#17" Target="#18=P:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::{Area}k__BackingField()" />
+  <Class Class="#19=T:[PostSharp.Patterns.Diagnostics]PostSharp.Patterns.Diagnostics.LogAttribute">
+    <Instance Declaration="#20=T:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData" Id="77c1ecdd470a8d5f">
+      <Target Target="#21=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Address()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22=Adds logging" Ordinal="42" LinesAvoided="5" />
+      </Target>
+      <Target Target="#23=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Address(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="43" LinesAvoided="5" />
+      </Target>
+      <Target Target="#24=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Lat()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="44" LinesAvoided="5" />
+      </Target>
+      <Target Target="#25=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Lat(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="45" LinesAvoided="5" />
+      </Target>
+      <Target Target="#26=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Lng()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="46" LinesAvoided="5" />
+      </Target>
+      <Target Target="#27=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Lng(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="47" LinesAvoided="5" />
+      </Target>
+      <Target Target="#28=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Width()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="48" LinesAvoided="5" />
+      </Target>
+      <Target Target="#29=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Width(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="49" LinesAvoided="5" />
+      </Target>
+      <Target Target="#30=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Length()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="50" LinesAvoided="5" />
+      </Target>
+      <Target Target="#31=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Length(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="51" LinesAvoided="5" />
+      </Target>
+      <Target Target="#32=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Slope()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="52" LinesAvoided="5" />
+      </Target>
+      <Target Target="#33=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Slope(System.Int32)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="53" LinesAvoided="5" />
+      </Target>
+      <Target Target="#34=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Orientation()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="54" LinesAvoided="5" />
+      </Target>
+      <Target Target="#35=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Orientation(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="55" LinesAvoided="5" />
+      </Target>
+      <Target Target="#36=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_PanelType()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="56" LinesAvoided="5" />
+      </Target>
+      <Target Target="#37=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_PanelType(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="57" LinesAvoided="5" />
+      </Target>
+      <Target Target="#38=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Panel()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="58" LinesAvoided="5" />
+      </Target>
+      <Target Target="#39=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Panel(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="59" LinesAvoided="5" />
+      </Target>
+      <Target Target="#40=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_Currency()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="60" LinesAvoided="5" />
+      </Target>
+      <Target Target="#41=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_Currency(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="61" LinesAvoided="5" />
+      </Target>
+      <Target Target="#42=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_AnnualEnConsumption()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="62" LinesAvoided="5" />
+      </Target>
+      <Target Target="#43=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_AnnualEnConsumption(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="63" LinesAvoided="5" />
+      </Target>
+      <Target Target="#44=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::get_AnnualElPrice()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="64" LinesAvoided="5" />
+      </Target>
+      <Target Target="#45=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::set_AnnualElPrice(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="65" LinesAvoided="5" />
+      </Target>
+      <Target Target="#46=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.InputSolarData::#ctor()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="66" LinesAvoided="5" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#47=T:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.MongoDbContext" Id="77c1ecdd14a5b886">
+      <Target Target="#48=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.MongoDbContext::#ctor()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="67" LinesAvoided="5" />
+      </Target>
+      <Target Target="#49=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.MongoDbContext::get_PanelsCollection()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="68" LinesAvoided="5" />
+      </Target>
+      <Target Target="#50=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.MongoDbContext::get_PanelTypesCollection()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="69" LinesAvoided="5" />
+      </Target>
+    </Instance>
+    <Instance Declaration="#51=T:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel" Id="77c1ecddf4c0259a">
+      <Target Target="#52=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::get_Id()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Semantic="Getter" Ordinal="8" LinesAvoided="5" />
+      </Target>
+      <Target Target="#53=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::set_Id(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Semantic="Setter" Ordinal="11" LinesAvoided="5" />
+      </Target>
+      <Target Target="#54=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::get_Model()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Semantic="Getter" Ordinal="13" LinesAvoided="5" />
+      </Target>
+      <Target Target="#55=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::set_Model(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Semantic="Setter" Ordinal="16" LinesAvoided="5" />
+      </Target>
+      <Target Target="#56=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::get_Manufacturer()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Semantic="Getter" Ordinal="18" LinesAvoided="5" />
+      </Target>
+      <Target Target="#57=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::set_Manufacturer(System.String)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Semantic="Setter" Ordinal="21" LinesAvoided="5" />
+      </Target>
+      <Target Target="#58=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::get_Efficiency()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="29" LinesAvoided="5" />
+      </Target>
+      <Target Target="#59=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::set_Efficiency(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="31" LinesAvoided="5" />
+      </Target>
+      <Target Target="#60=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::get_Cost()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="33" LinesAvoided="5" />
+      </Target>
+      <Target Target="#61=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::set_Cost(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="35" LinesAvoided="5" />
+      </Target>
+      <Target Target="#62=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::get_Area()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="37" LinesAvoided="5" />
+      </Target>
+      <Target Target="#63=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::set_Area(System.Double)" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="39" LinesAvoided="5" />
+      </Target>
+      <Target Target="#64=M:[RenewableEnergyCalculator]RenewableEnergyCalculator.Models.SolarPanel::#ctor()" Tags="premium">
+        <JoinPoint Advising="#19" Description="#22" Ordinal="41" LinesAvoided="5" />
+      </Target>
+    </Instance>
+  </Class>
+  <Class Class="#65=T:[PostSharp.Patterns.Model]PostSharp.Patterns.Model.NotifyPropertyChangedAttribute">
+    <Instance Declaration="#51" Id="77c1ecdd10c62a7e">
+      <Target>
+        <JoinPoint Advising="#65" Description="#66=Introduces event PropertyChanged" Ordinal="0" LinesAvoided="1" />
+        <JoinPoint Advising="#65" Description="#67=Introduces method QueryInterface" LinesAvoided="0" />
+        <JoinPoint Advising="#65" Description="#68=Introduces method OnChildPropertyChanging" Ordinal="2" LinesAvoided="0" />
+        <JoinPoint Advising="#65" Description="#69=Introduces method OnPropertyChanged" Ordinal="3" LinesAvoided="2" />
+        <JoinPoint Advising="#65" Description="#70=Introduces event ChildPropertyChanging" Ordinal="4" LinesAvoided="0" />
+        <JoinPoint Advising="#65" Description="#71=Introduces event ChildPropertyChanged" Ordinal="5" LinesAvoided="0" />
+        <JoinPoint Advising="#65" Description="#72=Introduces method OnChildPropertyChanged" Ordinal="6" LinesAvoided="0" />
+        <JoinPoint Advising="#65" Description="#73=Introduces interface(s) INotifyPropertyChanged, INotifyChildPropertyChanged, IQueryInterface" Ordinal="7" LinesAvoided="0" />
+        <JoinPoint Advised="#52" Advising="#65" Description="#74=Activates notifications for the property" Semantic="Getter" Ordinal="9" LinesAvoided="0" />
+        <JoinPoint Advised="#52" Advising="#65" Description="#75=Flushes the notification queue when the control flow exits the object" Semantic="Getter" Ordinal="10" LinesAvoided="0" />
+        <JoinPoint Advised="#53" Advising="#65" Description="#75" Semantic="Setter" Ordinal="12" LinesAvoided="0" />
+        <JoinPoint Advised="#54" Advising="#65" Description="#74" Semantic="Getter" Ordinal="14" LinesAvoided="0" />
+        <JoinPoint Advised="#54" Advising="#65" Description="#75" Semantic="Getter" Ordinal="15" LinesAvoided="0" />
+        <JoinPoint Advised="#55" Advising="#65" Description="#75" Semantic="Setter" Ordinal="17" LinesAvoided="0" />
+        <JoinPoint Advised="#56" Advising="#65" Description="#74" Semantic="Getter" Ordinal="19" LinesAvoided="0" />
+        <JoinPoint Advised="#56" Advising="#65" Description="#75" Semantic="Getter" Ordinal="20" LinesAvoided="0" />
+        <JoinPoint Advised="#57" Advising="#65" Description="#75" Semantic="Setter" Ordinal="22" LinesAvoided="0" />
+        <JoinPoint Advised="#2" Advising="#65" Description="#76=Enqueues change notifications for affected properties" Semantic="Setter" Ordinal="23" LinesAvoided="1" />
+        <JoinPoint Advised="#5" Advising="#65" Description="#76" Semantic="Setter" Ordinal="24" LinesAvoided="1" />
+        <JoinPoint Advised="#8" Advising="#65" Description="#76" Semantic="Setter" Ordinal="25" LinesAvoided="1" />
+        <JoinPoint Advised="#11" Advising="#65" Description="#76" Semantic="Setter" Ordinal="26" LinesAvoided="1" />
+        <JoinPoint Advised="#14" Advising="#65" Description="#76" Semantic="Setter" Ordinal="27" LinesAvoided="1" />
+        <JoinPoint Advised="#17" Advising="#65" Description="#76" Semantic="Setter" Ordinal="28" LinesAvoided="1" />
+        <JoinPoint Advised="#58" Advising="#65" Description="#75" Ordinal="30" LinesAvoided="0" />
+        <JoinPoint Advised="#59" Advising="#65" Description="#75" Ordinal="32" LinesAvoided="0" />
+        <JoinPoint Advised="#60" Advising="#65" Description="#75" Ordinal="34" LinesAvoided="0" />
+        <JoinPoint Advised="#61" Advising="#65" Description="#75" Ordinal="36" LinesAvoided="0" />
+        <JoinPoint Advised="#62" Advising="#65" Description="#75" Ordinal="38" LinesAvoided="0" />
+        <JoinPoint Advised="#63" Advising="#65" Description="#75" Ordinal="40" LinesAvoided="0" />
+      </Target>
+    </Instance>
+  </Class>
+  <Annotation Target="#77=M:[PostSharp.Patterns.Model]PostSharp.Patterns.Model.NotifyPropertyChangedAttribute::InitializeAspectInstance(PostSharp.Aspects.Advices.AspectInitializationReason)" Arguments="#78=2" Description="#79=PostSharp estimates that 2 lines of code are saved every time this advice is applied. Use the [LinesOfCodeAvoided] attribute on the aspect or specify the LinesOfCodeAvoided property on the advice attribute to override this value." />
+</Symbols>

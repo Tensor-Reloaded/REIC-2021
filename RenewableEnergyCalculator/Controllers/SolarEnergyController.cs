@@ -1,16 +1,17 @@
 ﻿using MongoDB.Driver;
-using PostSharp.Patterns.Diagnostics;
 using RenewableEnergyCalculator.Models;
 using System.Linq;
 using System.Web.Mvc;
-using System.ComponentModel;
 using System.Collections.Generic;
 using RenewableEnergyCalculator.Calculator;
 using RenewableEnergyCalculator.MailSystem;
 using RenewableEnergyCalculator.Models.Solar;
-using MongoDB.Bson;
-using System.Threading.Tasks;
 using System;
+using System.IO;
+using System.Net.Mail;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace RenewableEnergyCalculator.Controllers
 {
@@ -129,26 +130,47 @@ namespace RenewableEnergyCalculator.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendEmail(string email, string info)
+        [Obsolete]
+        public ActionResult SendEmail(string email, string info, string imageURI)
         {
+            // imageURI is not complete 
+
+            byte[] bytes = Convert.FromBase64String(imageURI.Split(',')[1]);
+            iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(bytes);
+
             ViewBag.Email = email;
+            StringReader sr = new StringReader("<b> Solar Energy Output Report <b> \n");
 
-            // prepare the mail
-            var mail = new Mail();
+            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            var htmlparser = new HTMLWorker(pdfDoc);
 
-            var recipient = new Recepient("User", email);
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+                pdfDoc.Open();
+                htmlparser.Parse(sr);
+                pdfDoc.Add(image);
+                pdfDoc.Close();
+                byte[] bytes1 = memoryStream.ToArray();
+                memoryStream.Close();
 
-            mail.TrySetRecipient(recipient);
+                // prepare the mail
+                var mail = new Mail();
 
-            mail.TrySetSubject();
+                var recipient = new Recepient("User", email);
 
-            mail.TrySetBody(info);
+                mail.TrySetRecipient(recipient);
 
-            //mail.TryAddAtachement(@"C:\Users\shank\source\repos\MailSystem\report.jpg");
+                mail.TrySetSubject();
 
-            mail.TrySendEmail();
+                mail.TrySetBody("The solar energy output is" + info);
 
-            return View("SolarResults");
+                mail.TryAddAtachement1(new MemoryStream(bytes1), "SolarEnergyReport.pdf");
+
+                mail.TrySendEmail();
+            }
+
+            return View("EmailSent");
         }
 
         public class ViewModel

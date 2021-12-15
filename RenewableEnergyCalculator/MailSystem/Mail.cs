@@ -48,7 +48,7 @@ namespace RenewableEnergyCalculator.MailSystem
             try
             {
                 //_message.Subject = System.IO.File.ReadAllText(@"C:\Users\shank\source\repos\MailSystem\EmailSubject.txt");
-                _message.Subject = "Hello";
+                _message.Subject = "REIC - Solar Energy Output Report";
                 return true;
             }
             catch (IOException ex)
@@ -97,6 +97,20 @@ namespace RenewableEnergyCalculator.MailSystem
             {
                 Path.GetFullPath(pathToAttachement);
                 _body.Attachments.Add(pathToAttachement);
+                return true;
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public bool TryAddAtachement1(MemoryStream bytes, string fileName)
+        {
+            try
+            {
+                _body.Attachments.Add(fileName,bytes);
                 return true;
             }
             catch (FileNotFoundException ex)
