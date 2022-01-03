@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace REIC
 {
-    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////
     //FileName: ResultEnergyData.cs
     //FileType: Visual C# Source file
     //Author : Bucnaru Raluca, Pavel Andrei
@@ -10,7 +12,15 @@ namespace REIC
     //////////////////////////////////////////////////////////////////////////////////////
     public abstract class ResultEnergyData
     {
+        
         /// The amount of energy produced in a year (in kW)
-        public abstract double YearlyEnergyProduced { get; }
+        public abstract IEnumerable<double> MonthlyEnergyProduced { get;  }
+        public double YearlyEnergyProduced => MonthlyEnergyProduced.Sum();
+        /// The energy produced with 100% efficiency (in kW)
+        public abstract double MaximumYearlyEnergy { get; }
+
+        /// The ratio between actual energy produced and the theorethical maximum.
+        public virtual double CapacityFactor => YearlyEnergyProduced / MaximumYearlyEnergy;
+
     }
 }

@@ -316,7 +316,7 @@
     <Compile Include="Utils\LandInfoSystem\Adaptee.cs" />
     <Compile Include="Utils\LandInfoSystem\Adapter.cs" />
     <Compile Include="Utils\WindEnergy\FunctionEntryLoggerAspect.cs" />
-    <Compile Include="Utils\WindEnergy\HistoricalClimateDataGetter.cs" />
+    <Compile Include="Utils\HistoricalClimateData\HistoricalClimateDataGetter.cs" />
     <Compile Include="Utils\LandInfoSystem\IRequests.cs" />
     <Compile Include="Utils\LandInfoSystem\Program.cs" />
     <Compile Include="Utils\MailSystem\Mail.cs" />
@@ -345,7 +345,7 @@
     <Compile Include="Utils\Testing\HomePage.cs" />
     <Compile Include="Utils\Testing\SignInPage .cs" />
     <Compile Include="Utils\Testing\UnitTest1.cs" />
-    <Compile Include="Utils\WindEnergy\HistoricalClimateSample.cs" />
+    <Compile Include="Utils\HistoricalClimateData\HistoricalClimateSample.cs" />
     <Compile Include="Utils\WindEnergy\PowerCurve.cs" />
     <Compile Include="Utils\WindEnergy\ResultWindEnergyData.cs" />
     <Compile Include="Utils\WindEnergy\Turbine.cs" />

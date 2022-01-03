@@ -10,13 +10,18 @@ namespace REIC
     //////////////////////////////////////////////////////////////////////////////////////
     class ResultSolarEnergyData : ResultEnergyData
     {
-        public override double YearlyEnergyProduced { get; }
+        public override IEnumerable<double> MonthlyEnergyProduced { get; }
 
         /// The panel model used
         public SolarPanel SolarPanel { get; }
 
         /// The optimal solar panel placements
         public List<GeographicalPoint> PanelLocation { get; }
+
+
+        // TODO replace
+        public override double MaximumYearlyEnergy { get { throw new NotImplementedException(); } }
+
 
         // things about the suitability could be added
         // eg.

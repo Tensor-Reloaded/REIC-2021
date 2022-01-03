@@ -1,28 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace REIC
 {
-    class ResultWindEnergyData : ResultEnergyData
+    public class ResultWindEnergyData : ResultEnergyData
     {
-        public override double YearlyEnergyProduced { get; }
+        public override IEnumerable<double> MonthlyEnergyProduced =>
+            MonthlyEnergyProducedPerTurbine.Select(x => x * NumberOfTurbines);
+
+        public List<double> MonthlyEnergyProducedPerTurbine { get; }
+
+        /// The energy produced with 100% efficiency (in kW)
+        public override double MaximumYearlyEnergy => Turbine.RatedPower * 356 * 24 * NumberOfTurbines;
+        /// The ratio between actual energy produced and the theorethical maximum.
+        public override double CapacityFactor => YearlyEnergyProduced / MaximumYearlyEnergy;
 
         /// The turbine model used
         public Turbine Turbine { get; }
 
-        /// The optimal wind turbine placements
-        public List<GeographicalPoint> TurbineLocation { get; }
+        public GeographicalPoint Location { get; }
+
+        public int NumberOfTurbines { get; }
 
         // things about the suitability could be added
         // eg.
         // bool IsSuitable;
         // string NotSuitableReason;
 
-        public ResultWindEnergyData(double yearlyEnergyProduced, Turbine turbine,
-                List<GeographicalPoint> turbineLocation)
+        public ResultWindEnergyData(List<double> montlyEnergyProducedPerTurbine, Turbine turbine,
+                                    GeographicalPoint location, int numberOfTurbines)
         {
-            this.YearlyEnergyProduced = yearlyEnergyProduced;
+            this.MonthlyEnergyProducedPerTurbine = montlyEnergyProducedPerTurbine;
             this.Turbine = turbine;
-            this.TurbineLocation = turbineLocation;
+            this.Location = location;
+            this.NumberOfTurbines = numberOfTurbines;
         }
     }
 }
