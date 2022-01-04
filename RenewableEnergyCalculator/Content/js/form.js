@@ -44,12 +44,27 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("tab");
     y = x[currentTab].getElementsByTagName("input");
+    s = x[currentTab].getElementsByTagName("select");
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
+        var ariaInvalid = y[i].getAttribute("aria-invalid");
         // If a field is empty...
-        if (y[i].value == "") {
+        if (ariaInvalid == "true" || y[i].value == "") {
             // add an "invalid" class to the field:
             y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+        }
+    }
+
+
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < s.length; i++) {
+        var ariaInvalid = s[i].getAttribute("aria-invalid");
+        // If a field is empty...
+        if (ariaInvalid == "true" || s[i].value == "0") {
+            // add an "invalid" class to the field:
+            s[i].className += " invalid";
             // and set the current valid status to false
             valid = false;
         }

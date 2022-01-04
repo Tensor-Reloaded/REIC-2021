@@ -25,7 +25,7 @@ namespace RenewableEnergyCalculator.Calculator
                     throw new ArgumentOutOfRangeException("energy");
                 }
 
-                monthlyEnergy.Add(E);
+                monthlyEnergy.Add(Math.Round(E));
             }
 
             return monthlyEnergy;

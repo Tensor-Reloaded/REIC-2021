@@ -124,6 +124,8 @@ namespace RenewableEnergyCalculator.MailSystem
         {
             _message.Body = _body.ToMessageBody();
             _mailClient = new SMTPClient();
+            // Added the line below to solve the "MailKit.Security.SslHandshakeException: An error occurred while attempting to establish an SSL or TLS connection." error (Irina)
+            _mailClient.server.CheckCertificateRevocation = false;
 
             try
             {
@@ -131,12 +133,12 @@ namespace RenewableEnergyCalculator.MailSystem
                 _mailClient.server.Authenticate(_sender.getEmailAddress(), _sender.getPassword());
                 _mailClient.server.Send(_message);
 
-                Console.WriteLine("Email Sent!");
+                System.Diagnostics.Debug.WriteLine("Email Sent!");
             }
             catch (Exception ex)
             {
 
-                Console.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return false;
             }
             finally

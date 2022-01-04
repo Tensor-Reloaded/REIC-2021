@@ -1,4 +1,4 @@
-﻿@model  RenewableEnergyCalculator.Controllers.WindEnergyController
+﻿@model  RenewableEnergyCalculator.Models.InputWindData
 
 <div class="wf-section">
     <div class="introheader cc-subpage">
@@ -26,11 +26,12 @@
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="center">
-                        <label for="Address">Enter a location: </label>
-                        <input type="text" class="input w-input" maxlength="256" name="Address" id="searchTextField" autocomplete="on" required>
-                        <input type="hidden" id="Address" name="Address" />
-                        <input type="hidden" id="Lat" name="Lat" />
-                        <input type="hidden" id="Lng" name="Lng" />
+                        @Html.LabelFor(m => m.Address, "Enter a location:")
+                        @Html.TextBoxFor(m => m.Address, new { @class = "input w-input", @name = "Address", @id = "searchTextField", @autocomplete = "on" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @Style = "color: red;" })
+                        @Html.HiddenFor(m => m.Address, new { @name = "Address", @id = "Address" })
+                        @Html.HiddenFor(m => m.Lat, new { @name = "Lat", @id = "Lat" })
+                        @Html.HiddenFor(m => m.Lng, new { @name = "Lng", @id = "Lng" })
                     </div>
                 </div>
             </div>
@@ -44,14 +45,11 @@
                 <div class="column w-col w-col-6">
                     <div class="center">
                         <div>
-                            <label for="Turbine" class="field-label">Select turbine:</label>
-                            <select id="turbine" name="Turbine" class="w-select">
-                                <option value="">Select turbine...</option>
-                                <option value="turbine 1">Turbine 1</option>
-                                <option value="turbine 2">Turbine 2</option>
-                            </select>
-                            <label for="NrTurbine" class="field-label">Numarul de turbine:</label>
-                            <input type="text" class="input w-input" maxlength="256" name="NrTurbine" placeholder="" required>
+                            @Html.LabelFor(m => m.Turbine, "Turbine:", new { @class = "field-label" })
+                            @Html.DropDownListFor(m => m.Turbine, new SelectList(@ViewBag.Turbines, "Value", "Text", 0), new { @class = "w-select" })
+
+                            @Html.LabelFor(m => m.NumberOfTurbines, "Number of turbines:", new { @class = "field-label" })
+                            @Html.TextBoxFor(m => m.NumberOfTurbines, new { @class = "input w-input", @name = "NumberOfTurbines", @placeholder = "", @Value = "" })
                         </div>
                     </div>
                 </div>
@@ -65,16 +63,16 @@
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="w-form">
-                        <label for="Currency" class="field-label">Currency</label>
-                        <select name="Currency" class="w-select">
-                            <option value="">Select currency...</option>
-                            <option value="RON">RON</option>
-                            <option value="EUR">EUR</option>
-                        </select>
-                        <label for="AnnualEnConsumption" class="field-label">Annual energy consumption:</label>
-                        <input type="text" class="input w-input" maxlength="256" name="AnnualEnConsumption" placeholder="">
-                        <label for="AnnualElPrice" class="field-label">Electricity price:</label>
-                        <input type="text" class="input w-input" maxlength="256" name="AnnualElPrice" placeholder="">
+                        @Html.LabelFor(m => m.Currency, "Currency:", new { @class = "field-label" })
+                        @Html.DropDownListFor(m => m.Currency, (SelectList)@ViewBag.Currencies, new { @class = "w-select" })
+
+                        @Html.LabelFor(m => m.AnnualEnConsumption, "Annual energy consumption:", new { @class = "field-label" })
+                        @Html.TextBoxFor(m => m.AnnualEnConsumption, new { @class = "input w-input", @name = "AnnualEnConsumption", @placeholder = "", @Value = "" })
+                        @Html.ValidationMessageFor(m => m.AnnualEnConsumption)
+
+                        @Html.LabelFor(m => m.AnnualElPrice, "Electricity price:", new { @class = "field-label" })
+                        @Html.TextBoxFor(m => m.AnnualElPrice, new { @class = "input w-input", @name = "AnnualElPrice", @placeholder = "", @Value = "" })
+                        @Html.ValidationMessageFor(m => m.AnnualElPrice)
                     </div>
                 </div>
             </div>

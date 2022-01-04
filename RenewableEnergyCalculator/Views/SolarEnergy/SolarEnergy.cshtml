@@ -1,4 +1,4 @@
-﻿@model  RenewableEnergyCalculator.Controllers.SolarEnergyController.ViewModel
+﻿@model  RenewableEnergyCalculator.Models.InputSolarData
 
 <div class="wf-section">
     <div class="introheader cc-subpage">
@@ -10,7 +10,7 @@
 <div class="section cc-store-home-wrap">
 
     <form id="regForm" method="post" action="@Url.Action("InputData", "SolarEnergy")">
-
+        @Html.ValidationSummary(true)
         <!-- Steps of the form: -->
         <div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
             <span class="step">Address</span>
@@ -27,11 +27,12 @@
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="center">
-                        <label for="Address">Enter a location: </label>
-                        <input type="text" class="input w-input" maxlength="256" name="Address" id="searchTextField" autocomplete="on" required>
-                        <input type="hidden" id="Address" name="Address" />
-                        <input type="hidden" id="Lat" name="Lat" />
-                        <input type="hidden" id="Lng" name="Lng" />
+                        @Html.LabelFor(m => m.Address, "Enter a location:")
+                        @Html.TextBoxFor(m => m.Address, new { @class = "input w-input", @name = "Address", @id = "searchTextField", @autocomplete = "on" })
+                        @Html.ValidationMessageFor(m => m.Address,"", new { @Style = "color: red;"})
+                        @Html.HiddenFor(m => m.Address, new { @name = "Address", @id = "Address" })
+                        @Html.HiddenFor(m => m.Lat, new { @name = "Lat", @id = "Lat" })
+                        @Html.HiddenFor(m => m.Lng, new { @name = "Lng", @id = "Lng" })
                     </div>
                 </div>
             </div>
@@ -45,18 +46,22 @@
                 <div class="column w-col w-col-6">
                     <div class="center">
                         <div>
-                            <label for="Width" class="field-label">Width of your roof (m):</label>
-                            <input type="text" class="input w-input" maxlength="256" name="Width" placeholder="" required>
-                            <label for="Length" class="field-label">Length of your roof (m):</label>
-                            <input type="text" class="input w-input" maxlength="256" name="Length" placeholder="" required>
-                            <label for="Slope" class="field-label">Slope (0-90):</label>
-                            <input type="text" class="input w-input" maxlength="256" name="Slope" placeholder="">
-                            <label for="Orientation" class="field-label">Orientation (N, S):</label>
-                            <select id="orientation" name="Orientation" class="w-select">
-                                <option value="">Select orientation...</option>
-                                <option value="N">N</option>
-                                <option value="S">S</option>
-                            </select>
+                            @Html.LabelFor(m => m.Width, "Width of your roof (m):", new { @class = "field-label" })
+                            @Html.TextBoxFor(m => m.Width, new { @class = "input w-input", @name = "Width", @placeholder = "", @Value = "" })
+                            @Html.ValidationMessageFor(m => m.Width, "", new { @Style = "color: red;" })
+
+                            @Html.LabelFor(m => m.Length, "Length of your roof (m):", new { @class = "field-label" })
+                            @Html.TextBoxFor(m => m.Length, new { @class = "input w-input", @name = "Length", @placeholder = "", @Value = "" })
+                            @Html.ValidationMessageFor(m => m.Length)
+
+                            @Html.LabelFor(m => m.Slope, "Slope (0-90):", new { @class = "field-label" })
+                            @Html.TextBoxFor(m => m.Slope, new { @class = "input w-input", @name = "Slope", @placeholder = "", @Value = "" })
+                            @Html.ValidationMessageFor(m => m.Slope)
+
+                            @Html.LabelFor(m => m.Orientation, "Orientation (N, S):", new { @class = "field-label", @placeholder = "", @Value = "" })
+                            @Html.DropDownListFor(m => m.Orientation, new SelectList(@ViewBag.Orientations, "Value", "Text", 0), new { @class = "w-select" })
+                            @Html.ValidationMessageFor(m => m.Orientation)
+
                         </div>
                     </div>
                 </div>
@@ -73,23 +78,10 @@
                     <div class="w-form">
                         Select an existing panel or choose the panel type.
                         <br />
-                        <label for="Panel" class="field-label">Panel</label>
-                        <select id="panel" name="Panel" class="w-select">
-                            <option value="0">Select one...</option>
-                            @foreach (var panel in Model.Panels)
-                            {
-                                <option value="@Html.DisplayFor(m=>panel.Id)">@Html.DisplayFor(m => panel.Model) (@Html.DisplayFor(m => panel.Manufacturer))</option>
-                            }
-                        </select>
-
-                        <label for="PanelType" class="field-label">Panel type</label>
-                        <select id="paneltype" name="PanelType" class="w-select">
-                            <option value="0">Select one...</option>
-                            @foreach (var panelType in Model.PanelTypes)
-                            {
-                                <option value="@Html.DisplayFor(m=>panelType.Id)">@Html.DisplayFor(m => panelType.PType) </option>
-                            }
-                        </select>
+                        @Html.LabelFor(m => m.Panel, "Panel:", new { @class = "field-label" })
+                        @Html.DropDownListFor(m => m.Panel, (SelectList)@ViewBag.Panels, new { @class = "w-select" })
+                        @Html.LabelFor(m => m.PanelType, "Panel type:", new { @class = "field-label" })
+                        @Html.DropDownListFor(m => m.PanelType, new SelectList(@ViewBag.PanelTypes, "Value", "Text", 0), new { @class = "w-select" })
                     </div>
                 </div>
             </div>
@@ -103,16 +95,16 @@
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="w-form">
-                        <label for="Currency" class="field-label">Currency</label>
-                        <select name="Currency" class="w-select">
-                            <option value="">Select currency...</option>
-                            <option value="RON">RON</option>
-                            <option value="EUR">EUR</option>
-                        </select>
-                        <label for="AnnualEnConsumption" class="field-label">Annual energy consumption:</label>
-                        <input type="text" class="input w-input" maxlength="256" name="AnnualEnConsumption" placeholder="">
-                        <label for="AnnualElPrice" class="field-label">Electricity price:</label>
-                        <input type="text" class="input w-input" maxlength="256" name="AnnualElPrice" placeholder="">
+                        @Html.LabelFor(m => m.Currency, "Currency:", new { @class = "field-label" })
+                        @Html.DropDownListFor(m => m.Currency, (SelectList)@ViewBag.Currencies, new { @class = "w-select" })
+
+                        @Html.LabelFor(m => m.AnnualEnConsumption, "Annual energy consumption:", new { @class = "field-label" })
+                        @Html.TextBoxFor(m => m.AnnualEnConsumption, new { @class = "input w-input", @name = "AnnualEnConsumption", @placeholder = "", @Value = "" })
+                        @Html.ValidationMessageFor(m => m.AnnualEnConsumption)
+
+                        @Html.LabelFor(m => m.AnnualElPrice, "Electricity price:", new { @class = "field-label" })
+                        @Html.TextBoxFor(m => m.AnnualElPrice, new { @class = "input w-input", @name = "AnnualElPrice", @placeholder = "", @Value = "" })
+                        @Html.ValidationMessageFor(m => m.AnnualElPrice)
                     </div>
                 </div>
             </div>
@@ -128,3 +120,6 @@
 
     </form>
 </div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

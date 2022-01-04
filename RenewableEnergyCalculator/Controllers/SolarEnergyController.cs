@@ -12,6 +12,11 @@ using System.Net.Mail;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Text;
+using System.Web;
+using System.Net;
+using System.Text.Json;
+using System.Globalization;
 
 namespace RenewableEnergyCalculator.Controllers
 {
@@ -29,39 +34,39 @@ namespace RenewableEnergyCalculator.Controllers
         // GET: SolarEnergy
         public ActionResult Index()
         {
-            /*PanelType panelType1 = new PanelType(Type.Monocrystalline, 25, 25);
-            PanelType panelType2 = new PanelType(Type.Passivated_Emitter_and_Rear_Cell_PERC, 20, 20);
-            PanelType panelType3 = new PanelType(Type.Polycrystalline, 15, 17);
-            PanelType panelType4 = new PanelType(Type.Thin_Film_Cadmium_Telluride_CdTe, 9, 11);
+            ViewBag.Orientations = GetOrientations();
+            ViewBag.PanelTypes = GetPanelTypes();
 
-
-            var panelTypes = new List<PanelType>() { panelType1, panelType2, panelType3, panelType4};
-
-            var panel1 = new SolarPanel();
-            panel1.Id = "1";
-            panel1.Model = "Evervolt";
-            panel1.Efficiency = 21.2;
-            panel1.Cost = 120;
-            panel1.Manufacturer = "Panasonic";
-
-            var panel2 = new SolarPanel();
-            panel2.Id = "2";
-            panel2.Model = "LAM60S20";
-            panel2.Efficiency = 21;
-            panel2.Cost = 120;
-            panel2.Manufacturer = "JA Solar";
-
-            var panels = new List<SolarPanel>() { panel1, panel2 };*/
-
-            var panelTypes = db.PanelTypesCollection.Find(panelType => true).ToList();
             var panels = db.PanelsCollection.Find(panel => true).ToList();
 
-            var model = new ViewModel() {
-                Panels = panels,
-                PanelTypes = panelTypes
+            List<SelectListItem> panelsList = panels.ConvertAll(a => {
+                return new SelectListItem() {
+                    Text = a.Model.ToString()+ "("+a.Manufacturer.ToString()+")",
+                    Value = a.Id.ToString()
+                };
+            });
+
+            panelsList.Insert(0, new SelectListItem() {
+                Text = "Select a panel...",
+                Value = "0"
+            });
+
+            var panelss = new SelectList(panelsList, "Value", "Text", 0);
+
+            ViewBag.Panels = panelss;
+
+
+            var listCurrencies = new[] {
+                new { Text = "Select currency...", Value = "0" },
+                new { Text = "EUR", Value = "EUR" },
+                new { Text = "RON", Value = "RON" }
             };
 
-            return View("SolarEnergy", model);
+            var currencies = new SelectList(listCurrencies, "Value", "Text", 2);
+
+            ViewBag.Currencies = currencies;
+
+            return View("SolarEnergy");
         }
 
         [HttpPost]
@@ -129,54 +134,92 @@ namespace RenewableEnergyCalculator.Controllers
             return View("SolarResults");
         }
 
+
         [HttpPost]
         [Obsolete]
-        public ActionResult SendEmail(string email, string info, string imageURI)
+        public ActionResult SendEmail(string json)
         {
-            // imageURI is not complete 
 
-            byte[] bytes = Convert.FromBase64String(imageURI.Split(',')[1]);
-            iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(bytes);
+            EmailData emailData = JsonSerializer.Deserialize<EmailData>(json);
 
-            ViewBag.Email = email;
-            StringReader sr = new StringReader("<b> Solar Energy Output Report <b> \n");
+            byte[] bytes = Convert.FromBase64String(emailData.SolarChart.Split(',')[1]);
+            Image image = Image.GetInstance(bytes);
+
+            var solarTableData = Convert.FromBase64String(emailData.SolarTable);
+            string decodedString = Encoding.UTF8.GetString(solarTableData);
+
+            StringReader title = new StringReader("<h2 style='text-align:center;'>Solar Energy Report</h2><br>");
+            StringReader solarTable = new StringReader(decodedString);
 
             Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
             var htmlparser = new HTMLWorker(pdfDoc);
 
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
                 pdfDoc.Open();
-                htmlparser.Parse(sr);
+                htmlparser.Parse(title);
+                image.ScaleAbsolute(image.Width/3, image.Height/3);
+                image.SetAbsolutePosition((PageSize.A4.Width - image.ScaledWidth) / 2, (PageSize.A4.Height - image.ScaledHeight)/3);
                 pdfDoc.Add(image);
+                htmlparser.Parse(solarTable);
                 pdfDoc.Close();
                 byte[] bytes1 = memoryStream.ToArray();
                 memoryStream.Close();
 
+
                 // prepare the mail
                 var mail = new Mail();
-
-                var recipient = new Recepient("User", email);
+                
+                var recipient = new Recepient("User", emailData.Email);
 
                 mail.TrySetRecipient(recipient);
-
                 mail.TrySetSubject();
-
-                mail.TrySetBody("The solar energy output is" + info);
-
+                mail.TrySetBody("Thank you for choosing our app!\n\nPlease,find the requested report attached to this email.");
                 mail.TryAddAtachement1(new MemoryStream(bytes1), "SolarEnergyReport.pdf");
 
                 mail.TrySendEmail();
             }
 
-            return View("EmailSent");
+            return Json(true);
         }
 
-        public class ViewModel
+        private List<SelectListItem> GetOrientations()
         {
-            public List<SolarPanel> Panels { get; set; }
-            public List<PanelType> PanelTypes { get; set; }
+            var orientations = new List<SelectListItem> {
+                new SelectListItem { Text = "Select orientation...", Value = "0", Selected=true},
+                new SelectListItem { Text = "N", Value = "N"},
+                new SelectListItem { Text = "S", Value = "S"}
+            };
+
+            return orientations;
         }
+
+        private List<SelectListItem> GetPanelTypes()
+        {
+            var panelTypes = db.PanelTypesCollection.Find(panelType => true).ToList();
+
+            List<SelectListItem> panels = panelTypes.ConvertAll(a => {
+                return new SelectListItem() {
+                    Text = a.PType.ToString(),
+                    Value = a.Id.ToString()
+                };
+            });
+
+            panels.Insert(0, new SelectListItem() {
+                Text = "Select a panel type...",
+                Value = "0"
+            });
+
+            return panels;
+        }
+
+        public class EmailData
+        {
+            public string Email { get; set; }
+            public string SolarChart { get; set; }
+            public string SolarTable { get; set; }
+        }
+
     }
 }

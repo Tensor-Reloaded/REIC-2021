@@ -1,0 +1,48 @@
+﻿<div class="wf-section">
+    <div class="introheader cc-subpage">
+        <div class="intro-content">
+            <div class="introtitle">Results<br></div>
+        </div>
+    </div>
+</div>
+
+
+<div id="Grid" class="section cc-store-home-wrap">
+    <h2 style="text-align: center">Solar Energy Output</h2>
+    <div class="columns w-row">
+        <div class="column w-col w-col-6" style="text-align:center; padding-top: 50px;">
+            <canvas class="solarChartcanvas" id="solarChart" style="width:100%; max-width:800px"></canvas>
+        </div>
+        <div class="column w-col w-col-6">
+            <table id='solarTable'>
+                <tr>
+                    <td>Location:</td>
+                    <td>@ViewBag.Location</td>
+                </tr>
+                <tr>
+                    <td>Turbine:</td>
+                    <td>@ViewBag.Turbine m</td>
+                </tr>
+                <tr>
+                    <td>Number of turbines:</td>
+                    <td>@ViewBag.NumberOfTurbines m</td>
+                </tr>
+                <tr>
+                    <td> <b>Wind Energy Output: </b></td>
+                    <td><b>@ViewBag.AnnualEnergy kWh</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="section cc-store-home-wrap">
+    <form id="emailForm">
+        <div class="center">
+            <label for="Email">Enter your email:</label>
+            <input type="email" class="input w-input" id="email" name="Email" required>
+            <input type="hidden" value=@ViewBag.AnnualEnergy name="info" />
+            <button id="btnSubmit" type="button">Submit</button>
+        </div>
+    </form>
+</div>

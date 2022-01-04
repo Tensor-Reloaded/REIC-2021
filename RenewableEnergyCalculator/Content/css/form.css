@@ -16,6 +16,10 @@ input.invalid {
     background-color: #ffdddd;
 }
 
+input.valid {
+    background-color: rgb(232, 240, 254);
+}
+
 /* Hide all steps by default: */
 .tab {
     display: none;
