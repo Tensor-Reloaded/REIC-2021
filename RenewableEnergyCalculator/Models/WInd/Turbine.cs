@@ -1,47 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace RenewableEnergyCalculator.Models.Wind
+﻿namespace RenewableEnergyCalculator.Models.Wind
 {
+    /// <summary>
+    /// Contains data about a specific wind turbine model
+    /// </summary>
     public class Turbine
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-        [BsonElement("Name")]
-        public float Name { get; set; }
-
+        /// <summary>
         /// The distance from the ground to the turbine blades. In meters.
-        [BsonElement("HubHeight")]
-        public float HubHeight { get; set; }
+        /// </summary>
+        public float HubHeight { get; }
 
+        /// <summary>
         /// The wind speed at which the turbine starts producing power. In m/s.
-        [BsonElement("CutInSpeed")]
-        public float CutInSpeed { get; set; }
+        /// </summary>
+        public float CutInSpeed { get; }
 
+        /// <summary>
         /// The wind speed at which the turbine stops producing power. In m/s.
         /// This is used to protect the turbine from strong winds.
-        [BsonElement("CutOutSpeed")]
-        public float CutOutSpeed { get; set; }
+        /// </summary>
+        public float CutOutSpeed { get; }
 
-        /// A curve that show how much energy we produce if the wind blows at x m/s.
-        [BsonElement("PowerCurveX")]
-        public float[] PowerCurveX { get; set;}
+        /// <summary>
+        /// A curve that show how much energy (kW) we produce if the wind blows at x m/s.
+        /// </summary>
+        public PowerCurve PowerCurve { get; }
 
-        [BsonElement("PowerCurveX")]
-        public float[] PowerCurveY { get; set; }
+        /// <summary>
+        /// The maximal power produced (in kW)
+        /// </summary>
+        public double RatedPower => PowerCurve.MaxValue;
 
         public Turbine(float hubHeight, float cutInSpeed, float cutOutSpeed, PowerCurve powerCurve)
         {
-            //HubHeight = hubHeight;
+            HubHeight = hubHeight;
             CutInSpeed = cutInSpeed;
             CutOutSpeed = cutOutSpeed;
-            //PowerCurve = powerCurve;
+            PowerCurve = powerCurve;
         }
     }
 }

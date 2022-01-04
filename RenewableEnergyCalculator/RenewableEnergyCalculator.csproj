@@ -398,7 +398,9 @@
     <Compile Include="MailSystem\SMTPClient.cs" />
     <Compile Include="Models\Solar\GetSolarRadiationAPI.cs" />
     <Compile Include="Models\Solar\InputSolarData.cs" />
+    <Compile Include="Models\Wind\GeographicalPoint.cs" />
     <Compile Include="Models\Wind\HistoricalClimateDataGetter.cs" />
+    <Compile Include="Models\Wind\HistoricalClimateSample.cs" />
     <Compile Include="Models\Wind\InputWindData.cs" />
     <Compile Include="Models\MongoDbContext.cs" />
     <Compile Include="Models\Solar\PanelType.cs" />
@@ -407,7 +409,9 @@
     <Compile Include="Models\Solar\SolarPanel.cs" />
     <Compile Include="Models\Solar\SolarRadiation.cs" />
     <Compile Include="Models\Wind\PowerCurve.cs" />
+    <Compile Include="Models\Wind\ResultEnergyData.cs" />
     <Compile Include="Models\Wind\ResultWindEnergyData.cs" />
+    <Compile Include="Models\Wind\DbTurbine.cs" />
     <Compile Include="Models\Wind\Turbine.cs" />
     <Compile Include="Models\Wind\WindProbabilityDistribution.cs" />
     <Compile Include="PDFGenerator\PDFGenerator.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MathNet.Numerics.Interpolation;
 using System.Linq;
 
-namespace RenewableEnergyCalculator.Models.WInd
+namespace RenewableEnergyCalculator.Models.Wind
 {
     /// <summary>
     /// The wind turbine power curves are given as pairs of samples.

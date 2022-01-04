@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using MongoDB.Driver;
 using RenewableEnergyCalculator.Calculator;
 using RenewableEnergyCalculator.Models;
-using RenewableEnergyCalculator.Models.WInd;
+using RenewableEnergyCalculator.Models.Wind;
 
 namespace RenewableEnergyCalculator.Controllers
 {
@@ -35,18 +35,21 @@ namespace RenewableEnergyCalculator.Controllers
             if (ModelState.IsValid)
             {
                 
-                var turbine = db.TurbinesCollection.Find(x => x.Id == inputWindData.Turbine).ToList().First();
+                var dbturbine = db.TurbinesCollection.Find(x => x.Id == inputWindData.Turbine).ToList().First();
                 
 
-                var powerCurve = new PowerCurve(new List<Tuple<double, double>>() {
-                    new Tuple<double, double>(turbine.PowerCurveX[0], turbine.PowerCurveY[0]),
-                    new Tuple<double, double>(turbine.PowerCurveX[1], turbine.PowerCurveY[1]),//5 MW
+                var powerCurve = new PowerCurve(dbturbine.PowerCurveX.Select(x=>(double)x),
+                    dbturbine.PowerCurveY.Select(x => (double)x));
 
-                    new Tuple<double, double>(turbine.PowerCurveX[2], turbine.PowerCurveY[2]),//5 MW
-                    new Tuple<double, double>(turbine.PowerCurveX[3], turbine.PowerCurveY[3]),//5 MW)
-                });
+                var turbine = new Turbine(
+                    hubHeight: dbturbine.HubHeight,
+                    cutInSpeed: dbturbine.CutInSpeed,
+                    cutOutSpeed: dbturbine.CutOutSpeed,
+                    powerCurve: powerCurve);
 
-                var nrOfTurbines = Int32.Parse(inputWindData.NumberOfTurbines);
+                var nrOfTurbines = int.Parse(inputWindData.NumberOfTurbines);
+
+                var location = new GeographicalPoint(inputWindData.Lat, inputWindData.Lng);
 
                 var cal = new WindEnergyCalculator( turbine, nrOfTurbines, location);
             }
