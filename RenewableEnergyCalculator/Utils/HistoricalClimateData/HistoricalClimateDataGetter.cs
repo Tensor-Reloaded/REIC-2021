@@ -16,7 +16,22 @@ namespace REIC
         string Key { get; set; }
         public HistoricalClimateDataGetter()
         {
-            Key = File.ReadAllText(@"C:\reic\key.txt").Trim();
+            Key = System.Configuration.ConfigurationManager.AppSettings["ClimateApiKey"];
+                //File.ReadAllText(@"C:\reic\key.txt").Trim();
+        }
+        public HistoricalClimateDataGetter(string key)
+        {
+            Key = key;
+        }
+
+        /// Get the mean temperature for every month at the location `point`
+        /// Note: the temperatures are in celsius
+        /// index 0 is January, 1 February ...
+        public List<double> GetMonthlyMeanTemperatures(GeographicalPoint point)
+        {
+            var values = GetValuesAtPoint(point);
+            return Enumerable.Range(1, 12).Select(m =>
+                values.Where(x => x.Month == m).Select(x => x.Temperature).Average()).ToList();
         }
 
         public List<HistoricalClimateSample> GetValuesAtPoint(GeographicalPoint point)
