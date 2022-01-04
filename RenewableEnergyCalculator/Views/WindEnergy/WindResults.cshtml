@@ -8,7 +8,7 @@
 
 
 <div id="Grid" class="section cc-store-home-wrap">
-    <h2 style="text-align: center">Solar Energy Output</h2>
+    <h2 style="text-align: center">Wind Energy Output</h2>
     <div class="columns w-row">
         <div class="column w-col w-col-6" style="text-align:center; padding-top: 50px;">
             <canvas class="solarChartcanvas" id="solarChart" style="width:100%; max-width:800px"></canvas>
@@ -21,15 +21,19 @@
                 </tr>
                 <tr>
                     <td>Turbine:</td>
-                    <td>@ViewBag.Turbine m</td>
+                    <td>@ViewBag.Turbine</td>
                 </tr>
                 <tr>
                     <td>Number of turbines:</td>
-                    <td>@ViewBag.NumberOfTurbines m</td>
+                    <td>@ViewBag.NumberOfTurbines</td>
                 </tr>
                 <tr>
                     <td> <b>Wind Energy Output: </b></td>
-                    <td><b>@ViewBag.AnnualEnergy kWh</b></td>
+                    <td><b>@ViewBag.AnnualEnergy GWh</b></td>
+                </tr>
+                <tr>
+                    <td> <b>Capacity Factor: </b></td>
+                    <td><b>@ViewBag.CapacityFactor%</b></td>
                 </tr>
             </table>
         </div>
@@ -46,3 +50,10 @@
         </div>
     </form>
 </div>
+
+<script>
+    var energies = @Html.Raw(Json.Encode(@ViewBag.MonthlyEnergyArray));
+    var ajaxUrl = "@Url.Action("SendEmail", "SolarEnergy")";
+</script>
+<script src="~/Content/js/results-wind.js"></script>
+

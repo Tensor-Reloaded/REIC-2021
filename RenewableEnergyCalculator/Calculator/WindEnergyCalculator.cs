@@ -50,7 +50,7 @@ namespace RenewableEnergyCalculator.Calculator
         }
 
         //[FunctionEntryLoggerAspect]
-        public ResultEnergyData Calculate()
+        public ResultWindEnergyData Calculate()
         {
             double[] monthSizes = new[] {
                 31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31

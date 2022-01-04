@@ -14,7 +14,7 @@ namespace RenewableEnergyCalculator.Models.Wind
         public string Id { get; set; }
 
         [BsonElement("Name")]
-        public float Name { get; set; }
+        public string Name { get; set; }
 
         /// The distance from the ground to the turbine blades. In meters.
         [BsonElement("HubHeight")]
@@ -33,7 +33,7 @@ namespace RenewableEnergyCalculator.Models.Wind
         [BsonElement("PowerCurveX")]
         public float[] PowerCurveX { get; set;}
 
-        [BsonElement("PowerCurveX")]
+        [BsonElement("PowerCurveY")]
         public float[] PowerCurveY { get; set; }
     }
 }
