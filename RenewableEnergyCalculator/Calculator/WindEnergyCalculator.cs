@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using RenewableEnergyCalculator.Models.Wind;
+using MathNet.Numerics;
 
 namespace RenewableEnergyCalculator.Calculator
 {
@@ -48,16 +49,12 @@ namespace RenewableEnergyCalculator.Calculator
         {
         }
 
-        [FunctionEntryLoggerAspect]
-        public override ResultEnergyData Calculate()
+        //[FunctionEntryLoggerAspect]
+        public ResultEnergyData Calculate()
         {
             double[] monthSizes = new[] {
                 31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
             };
-            // ...
-            //return new WindEnergyData(...);
-            //throw new NotImplementedException();
-            double operatingPercentage = 1;// .90;
 
             var integrals = monthlyWindDistributions.Select(
                 windDistribution =>
@@ -68,12 +65,6 @@ namespace RenewableEnergyCalculator.Calculator
             var resultEnergy = integrals.Zip(monthSizes,
                     (val, monthSize) => 24 * val * monthSize
                 ).ToList();
-
-
-            //double resultEnergy = operatingPercentage * 365 * 24*integral;
-
-
-
 
             return new ResultWindEnergyData(resultEnergy,
                 numberOfTurbines: this.numberOfTurbines,

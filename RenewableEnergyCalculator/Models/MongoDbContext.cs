@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using PostSharp.Patterns.Diagnostics;
 using PostSharp.Extensibility;
-using RenewableEnergyCalculator.Models.WInd;
+using RenewableEnergyCalculator.Models.Wind;
 
 namespace RenewableEnergyCalculator.Models
 {
@@ -38,10 +38,10 @@ namespace RenewableEnergyCalculator.Models
             }
         }
 
-        public IMongoCollection<Turbine> TurbinesCollection
+        public IMongoCollection<DbTurbine> TurbinesCollection
         {
             get {
-                IMongoCollection<Turbine> turbines = _mongoDb.GetCollection<Turbine>("Turbine");
+                IMongoCollection<DbTurbine> turbines = _mongoDb.GetCollection<DbTurbine>("Turbine");
                 return turbines;
             }
         }

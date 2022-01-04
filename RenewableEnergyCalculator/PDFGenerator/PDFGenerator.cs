@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
-using RenewableEnergyCalculator.Models.WInd;
+using RenewableEnergyCalculator.Models.Wind;
 
 namespace RenewableEnergyCalculator.PDFGenerator
 {
