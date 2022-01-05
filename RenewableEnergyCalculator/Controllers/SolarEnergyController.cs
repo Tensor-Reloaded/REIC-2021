@@ -175,7 +175,7 @@ namespace RenewableEnergyCalculator.Controllers
 
                 mail.TrySetRecipient(recipient);
                 mail.TrySetSubject();
-                mail.TrySetBody("Thank you for choosing our app!\n\nPlease,find the requested report attached to this email.");
+                mail.TrySetBody("Thank you for choosing our app!\n\nPlease, find the requested report attached to this email.");
                 mail.TryAddAtachement1(new MemoryStream(bytes1), "SolarEnergyReport.pdf");
 
                 mail.TrySendEmail();

@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.Json;
 using System.Web;
 using System.Web.Mvc;
+using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
 using MongoDB.Driver;
 using RenewableEnergyCalculator.Calculator;
+using RenewableEnergyCalculator.MailSystem;
 using RenewableEnergyCalculator.Models;
 using RenewableEnergyCalculator.Models.Wind;
+using static RenewableEnergyCalculator.Controllers.SolarEnergyController;
+using Image = iTextSharp.text.Image;
 
 namespace RenewableEnergyCalculator.Controllers
 {
@@ -87,6 +97,55 @@ namespace RenewableEnergyCalculator.Controllers
             }
 
             return View("WindResults");
+        }
+
+        [HttpPost]
+        [Obsolete]
+        public ActionResult SendEmail(string json)
+        {
+
+            EmailData emailData = JsonSerializer.Deserialize<EmailData>(json);
+
+            byte[] bytes = Convert.FromBase64String(emailData.SolarChart.Split(',')[1]);
+            Image image = Image.GetInstance(bytes);
+
+            var solarTableData = Convert.FromBase64String(emailData.SolarTable);
+            string decodedString = Encoding.UTF8.GetString(solarTableData);
+
+            StringReader title = new StringReader("<h2 style='text-align:center;'>Wind Energy Report</h2><br>");
+            StringReader solarTable = new StringReader(decodedString);
+
+            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            var htmlparser = new HTMLWorker(pdfDoc);
+
+            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            {
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+                pdfDoc.Open();
+                htmlparser.Parse(title);
+                image.ScaleAbsolute(image.Width / 3, image.Height / 3);
+                image.SetAbsolutePosition((PageSize.A4.Width - image.ScaledWidth) / 2, (PageSize.A4.Height - image.ScaledHeight) / 3);
+                pdfDoc.Add(image);
+                htmlparser.Parse(solarTable);
+                pdfDoc.Close();
+                byte[] bytes1 = memoryStream.ToArray();
+                memoryStream.Close();
+
+
+                // prepare the mail
+                var mail = new Mail();
+
+                var recipient = new Recepient("User", emailData.Email);
+
+                mail.TrySetRecipient(recipient);
+                mail.TrySetSubject();
+                mail.TrySetBody("Thank you for choosing our app!\n\nPlease, find the requested report attached to this email.");
+                mail.TryAddAtachement1(new MemoryStream(bytes1), "WindEnergyReport.pdf");
+
+                mail.TrySendEmail();
+            }
+
+            return Json(true);
         }
 
         private List<SelectListItem> GetTurbines()

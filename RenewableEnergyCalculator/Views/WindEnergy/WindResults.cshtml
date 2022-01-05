@@ -53,7 +53,8 @@
 
 <script>
     var energies = @Html.Raw(Json.Encode(@ViewBag.MonthlyEnergyArray));
-    var ajaxUrl = "@Url.Action("SendEmail", "SolarEnergy")";
+    var ajaxUrl = "@Url.Action("SendEmail", "WindEnergy")";
 </script>
+
 <script src="~/Content/js/results-wind.js"></script>
 
