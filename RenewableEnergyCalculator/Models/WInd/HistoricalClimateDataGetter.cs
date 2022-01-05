@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace RenewableEnergyCalculator.Models.Wind
 {
@@ -14,8 +15,7 @@ namespace RenewableEnergyCalculator.Models.Wind
         string Key { get; set; }
         public HistoricalClimateDataGetter()
         {
-            Key = System.Configuration.ConfigurationManager.AppSettings["ClimateApiKey"];
-            //File.ReadAllText(@"C:\reic\key.txt").Trim();
+            Key = File.ReadAllText(@"C:\reic\key.txt").Trim();
         }
         public HistoricalClimateDataGetter(string key)
         {

@@ -16,9 +16,9 @@ namespace RenewableEnergyCalculator.Models
 
         public string Turbine { get; set; }
 
-        [Required(ErrorMessage = "Slope is required.")]
+        [Required(ErrorMessage = "Number of turbines.")]
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a number grater than 0.")]
-        public string NumberOfTurbines { get; set; }
+        public int NumberOfTurbines { get; set; }
 
         [Required(ErrorMessage = "Currency is required")]
         public string Currency { get; set; }

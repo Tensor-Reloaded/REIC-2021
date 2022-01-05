@@ -40,7 +40,7 @@
         <div class="tab">
             <div class="columns w-row">
                 <div class="column w-col w-col-6">
-                    <img width="518" sizes="(max-width: 479px) 100vw, (max-width: 767px) 89vw, 45vw" src="~/Content/images/unnamed-p-500.png" srcset="~/Content/images/unnamed-p-500.png 500w, ~/Content/images/unnamed.png 600w" alt="" class="image">
+                    <img width="518" src="~/Content/images/turbine_a.jpg"  alt="" class="image">
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="center">
@@ -59,13 +59,13 @@
         <div class="tab">
             <div class="columns w-row">
                 <div class="column w-col w-col-6">
-                    <img width="637" sizes="(max-width: 479px) 100vw, (max-width: 767px) 91vw, 45vw" src="~/Content/images/p15_123.jpg" loading="lazy" srcset="~/Content/images/p15_123-p-500.jpeg 500w, ~/Content/images/p15_123.jpg 719w" alt="" class="pvcellsimage">
+                    <img width="637" src="~/Content/images/turbine_b.png" loading="lazy" alt="" class="pvcellsimage">
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="w-form">
                         @Html.LabelFor(m => m.Currency, "Currency:", new { @class = "field-label" })
                         @Html.DropDownListFor(m => m.Currency, (SelectList)@ViewBag.Currencies, new { @class = "w-select" })
-
+                            
                         @Html.LabelFor(m => m.AnnualEnConsumption, "Annual energy consumption:", new { @class = "field-label" })
                         @Html.TextBoxFor(m => m.AnnualEnConsumption, new { @class = "input w-input", @name = "AnnualEnConsumption", @placeholder = "", @Value = "" })
                         @Html.ValidationMessageFor(m => m.AnnualEnConsumption)

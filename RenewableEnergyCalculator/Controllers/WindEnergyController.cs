@@ -26,6 +26,15 @@ namespace RenewableEnergyCalculator.Controllers
             var turbines = GetTurbines();
             ViewBag.Turbines = turbines;
 
+            var listCurrencies = new[] {
+                new { Text = "Select currency...", Value = "0" },
+                new { Text = "EUR", Value = "EUR" },
+                new { Text = "RON", Value = "RON" }
+            };
+
+            var currencies = new SelectList(listCurrencies, "Value", "Text", 2);
+
+            ViewBag.Currencies = currencies;
             return View("WindEnergy");
         }
 
@@ -34,8 +43,7 @@ namespace RenewableEnergyCalculator.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                var dbturbine = db.TurbinesCollection.Find(x => x.Id == inputWindData.Turbine).ToList().First();
+                var dbturbine = db.TurbinesCollection.AsQueryable().ToList().First(x => x.Id == inputWindData.Turbine);
                 
 
                 var powerCurve = new PowerCurve(dbturbine.PowerCurveX.Select(x=>(double)x),
@@ -47,11 +55,31 @@ namespace RenewableEnergyCalculator.Controllers
                     cutOutSpeed: dbturbine.CutOutSpeed,
                     powerCurve: powerCurve);
 
-                var nrOfTurbines = int.Parse(inputWindData.NumberOfTurbines);
+                var nrOfTurbines = inputWindData.NumberOfTurbines;
 
                 var location = new GeographicalPoint(inputWindData.Lat, inputWindData.Lng);
 
                 var cal = new WindEnergyCalculator( turbine, nrOfTurbines, location);
+
+
+                var result = cal.Calculate();
+
+                ViewBag.Location = inputWindData.Address;
+
+                double w_to_gw(double w) => w / 1_000_000_000;
+
+                ViewBag.MonthlyEnergyArray = result.MonthlyEnergyProduced.ToArray();
+                ViewBag.AnnualEnergy = Math.Round(w_to_gw(result.YearlyEnergyProduced), 2);
+                ViewBag.Turbine = dbturbine.Name;
+                ViewBag.CapacityFactor = (result.CapacityFactor*100).ToString(".00");
+                ViewBag.NumberOfTurbines = result.NumberOfTurbines;
+
+
+                ViewBag.Currency = inputWindData.Currency;
+                ViewBag.AnnualEnConsumption = inputWindData.AnnualEnConsumption;
+                ViewBag.AnnualElPrice = inputWindData.AnnualElPrice;
+                ViewBag.MonthlyEnergy = string.Join(",", result.MonthlyEnergyProduced.Select(w_to_gw));
+
             }
             else
             {
@@ -63,7 +91,8 @@ namespace RenewableEnergyCalculator.Controllers
 
         private List<SelectListItem> GetTurbines()
         {
-            var turbinesList = db.TurbinesCollection.Find(turbine => true).ToList();
+            var turbinesList = db.TurbinesCollection.AsQueryable().ToList();
+            //Find(turbine => true).ToList();
 
             List<SelectListItem> turbines = turbinesList.ConvertAll(a => {
                 return new SelectListItem() {

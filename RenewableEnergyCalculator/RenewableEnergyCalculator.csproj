@@ -442,10 +442,13 @@
     <Content Include="Content\images\Total-monthly-energy-use-for-large-office-p-500.png" />
     <Content Include="Content\images\Total-monthly-energy-use-for-large-office-p-800.png" />
     <Content Include="Content\images\Total-monthly-energy-use-for-large-office.png" />
+    <Content Include="Content\images\turbine_a.jpg" />
+    <Content Include="Content\images\turbine_b.png" />
     <Content Include="Content\images\unnamed-p-500.png" />
     <Content Include="Content\images\unnamed.png" />
     <Content Include="Content\images\webclip.png" />
     <Content Include="Content\js\form.js" />
+    <Content Include="Content\js\results-wind.js" />
     <Content Include="Content\js\results.js" />
     <Content Include="Content\js\webflow.js" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
