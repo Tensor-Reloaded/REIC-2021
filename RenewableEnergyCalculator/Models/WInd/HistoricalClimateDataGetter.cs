@@ -15,7 +15,7 @@ namespace RenewableEnergyCalculator.Models.Wind
         string Key { get; set; }
         public HistoricalClimateDataGetter()
         {
-            Key = File.ReadAllText(@"C:\reic\key.txt").Trim();
+            Key = System.Configuration.ConfigurationManager.AppSettings["ClimateApiKey"];
         }
         public HistoricalClimateDataGetter(string key)
         {
