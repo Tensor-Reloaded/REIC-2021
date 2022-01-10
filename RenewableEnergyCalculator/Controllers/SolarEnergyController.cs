@@ -59,7 +59,6 @@ namespace RenewableEnergyCalculator.Controllers
             var listCurrencies = new[] {
                 new { Text = "Select currency...", Value = "0" },
                 new { Text = "EUR", Value = "EUR" },
-                new { Text = "RON", Value = "RON" }
             };
 
             var currencies = new SelectList(listCurrencies, "Value", "Text", 2);
@@ -101,6 +100,11 @@ namespace RenewableEnergyCalculator.Controllers
                 var monthlyEnergy = calculator.CalculateMonthlyEnergy(inputSolarData.Width, inputSolarData.Length, panel.Area, panel.Efficiency, averageMonthlyRadiation, 0.75);
                 var annualEnergy = calculator.CalculateAnnualEnergy(monthlyEnergy);
 
+                var panelsCost = panel.Cost * calculator.GetNrOfPanels(inputSolarData.Width * inputSolarData.Length, panel.Area);
+
+                var payback = calculator.CalculateROI(panelsCost, inputSolarData.AnnualEnConsumption, inputSolarData.AnnualElPrice);
+
+
                 ViewBag.Location = inputSolarData.Address;
                 ViewBag.RoofWidth = inputSolarData.Width;
                 ViewBag.RoofLength = inputSolarData.Length;
@@ -115,14 +119,14 @@ namespace RenewableEnergyCalculator.Controllers
                 ViewBag.MonthlyEnergyArray = monthlyEnergy;
                 ViewBag.AnnualEnergy = Math.Round(annualEnergy, 2);
 
-
-
                 ViewBag.Currency = inputSolarData.Currency;
                 ViewBag.AnnualEnConsumption = inputSolarData.AnnualEnConsumption;
                 ViewBag.AnnualElPrice = inputSolarData.AnnualElPrice;
-                ViewBag.MonthlyRadiation = string.Join(",", averageMonthlyRadiation);
-                ViewBag.AnnualRadiation = averageAnnualRadiation;
-                ViewBag.MonthlyEnergy = string.Join(",", monthlyEnergy);
+                ViewBag.Payback = payback;
+
+                //ViewBag.MonthlyRadiation = string.Join(",", averageMonthlyRadiation);
+                //ViewBag.AnnualRadiation = averageAnnualRadiation;
+                //ViewBag.MonthlyEnergy = string.Join(",", monthlyEnergy);
                 
                 
             }

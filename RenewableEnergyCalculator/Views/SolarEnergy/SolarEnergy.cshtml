@@ -7,8 +7,11 @@
         </div>
     </div>
 </div>
-<div class="section cc-store-home-wrap">
 
+
+<div id="loader" class="center" style="display:none"></div>
+
+<div id ="formSection" class="section cc-store-home-wrap">
     <form id="regForm" method="post" action="@Url.Action("InputData", "SolarEnergy")">
         @Html.ValidationSummary(true)
         <!-- Steps of the form: -->
@@ -29,7 +32,7 @@
                     <div class="center">
                         @Html.LabelFor(m => m.Address, "Enter a location:")
                         @Html.TextBoxFor(m => m.Address, new { @class = "input w-input", @name = "Address", @id = "searchTextField", @autocomplete = "on" })
-                        @Html.ValidationMessageFor(m => m.Address,"", new { @Style = "color: red;"})
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @Style = "color: red;" })
                         @Html.HiddenFor(m => m.Address, new { @name = "Address", @id = "Address" })
                         @Html.HiddenFor(m => m.Lat, new { @name = "Lat", @id = "Lat" })
                         @Html.HiddenFor(m => m.Lng, new { @name = "Lng", @id = "Lng" })
@@ -97,12 +100,13 @@
                     <div class="w-form">
                         @Html.LabelFor(m => m.Currency, "Currency:", new { @class = "field-label" })
                         @Html.DropDownListFor(m => m.Currency, (SelectList)@ViewBag.Currencies, new { @class = "w-select" })
+                        @Html.ValidationMessageFor(m => m.Currency, "", new { @Style = "color: red;" })
 
-                        @Html.LabelFor(m => m.AnnualEnConsumption, "Annual energy consumption:", new { @class = "field-label" })
+                        @Html.LabelFor(m => m.AnnualEnConsumption, "Average annual energy consumption (kWh):", new { @class = "field-label" })
                         @Html.TextBoxFor(m => m.AnnualEnConsumption, new { @class = "input w-input", @name = "AnnualEnConsumption", @placeholder = "", @Value = "" })
                         @Html.ValidationMessageFor(m => m.AnnualEnConsumption, "", new { @Style = "color: red;" })
 
-                        @Html.LabelFor(m => m.AnnualElPrice, "Electricity price:", new { @class = "field-label" })
+                        @Html.LabelFor(m => m.AnnualElPrice, "Average electricity price:", new { @class = "field-label" })
                         @Html.TextBoxFor(m => m.AnnualElPrice, new { @class = "input w-input", @name = "AnnualElPrice", @placeholder = "", @Value = "" })
                         @Html.ValidationMessageFor(m => m.AnnualElPrice, "", new { @Style = "color: red;" })
                     </div>

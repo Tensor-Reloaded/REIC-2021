@@ -10,7 +10,7 @@
 <div id="Grid" class="section cc-store-home-wrap">
     <h2 style="text-align: center">Solar Energy Output</h2>
     <div class="columns w-row">
-        <div class="column w-col w-col-6" style="text-align:center; padding-top: 50px;">
+        <div class="column w-col w-col-6" style="text-align:center; padding-top: 70px;">
             <canvas class="solarChartcanvas" id="solarChart" style="width:100%; max-width:800px"></canvas>
         </div>
         <div class="column w-col w-col-6">
@@ -55,14 +55,29 @@
                     <td> <b>Solar Energy Output: </b></td>
                     <td><b>@ViewBag.AnnualEnergy kWh</b></td>
                 </tr>
+
+                <tr>
+                    <td>Average annual energy consumption:</td>
+                    <td>@ViewBag.AnnualEnConsumption kWh</td>
+                </tr>
+                <tr>
+                    <td>Average electricity price:</td>
+                    <td>@ViewBag.AnnualElPrice @ViewBag.Currency</td>
+                </tr>
+                <tr>
+                    <td><b>System payback:</b></td>
+                    <td><b>@ViewBag.Payback years</b></td>
+                </tr>
+
             </table>
         </div>
     </div>
 </div>
 
+
 <div class="section cc-store-home-wrap">
     <form id="emailForm">
-        <div class="center">
+        <div>
             <label for="Email">Enter your email:</label>
             <input type="email" class="input w-input" id="email" name="Email" required>
             <input type="hidden" value=@ViewBag.AnnualEnergy name="info" />
@@ -75,6 +90,7 @@
     var energies = @Html.Raw(Json.Encode(@ViewBag.MonthlyEnergyArray));
     var ajaxUrl = "@Url.Action("SendEmail", "SolarEnergy")";
 </script>
+
 <script src="~/Content/js/results.js"></script>
 
 
