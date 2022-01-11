@@ -16,6 +16,9 @@ namespace RenewableEnergyCalculator.Models.Wind
         [BsonElement("Name")]
         public string Name { get; set; }
 
+        [BsonElement("Cost")]
+        public double Cost { get; set; }
+
         /// The distance from the ground to the turbine blades. In meters.
         [BsonElement("HubHeight")]
         public float HubHeight { get; set; }

@@ -28,23 +28,13 @@ namespace RenewableEnergyCalculator.Controllers
     
     public class WindEnergyController : Controller
     {
-        private MongoDbContext db = new MongoDbContext();
+        private readonly MongoDbContext db = new MongoDbContext();
 
         // GET: WindEnergy
         public ActionResult Index()
         {
-            var turbines = GetTurbines();
-            ViewBag.Turbines = turbines;
-
-            var listCurrencies = new[] {
-                new { Text = "Select currency...", Value = "0" },
-                new { Text = "EUR", Value = "EUR" },
-                new { Text = "RON", Value = "RON" }
-            };
-
-            var currencies = new SelectList(listCurrencies, "Value", "Text", 2);
-
-            ViewBag.Currencies = currencies;
+            ViewBag.Turbines = GetTurbines();
+            ViewBag.Currencies = GetCurrencies();
             return View("WindEnergy");
         }
 
@@ -63,16 +53,19 @@ namespace RenewableEnergyCalculator.Controllers
                     hubHeight: dbturbine.HubHeight,
                     cutInSpeed: dbturbine.CutInSpeed,
                     cutOutSpeed: dbturbine.CutOutSpeed,
-                    powerCurve: powerCurve);
+                    powerCurve: powerCurve,
+                    cost: dbturbine.Cost);
 
                 var nrOfTurbines = inputWindData.NumberOfTurbines;
 
                 var location = new GeographicalPoint(inputWindData.Lat, inputWindData.Lng);
 
-                var cal = new WindEnergyCalculator( turbine, nrOfTurbines, location);
+                var calculator = new WindEnergyCalculator( turbine, nrOfTurbines, location);
 
 
-                var result = cal.Calculate();
+                var result = calculator.Calculate();
+
+                var payback = SolarEnergyCalculator.CalculateROI(turbine.Cost * inputWindData.NumberOfTurbines, inputWindData.AnnualEnConsumption, inputWindData.AnnualElPrice);
 
                 ViewBag.Location = inputWindData.Address;
 
@@ -88,7 +81,7 @@ namespace RenewableEnergyCalculator.Controllers
                 ViewBag.Currency = inputWindData.Currency;
                 ViewBag.AnnualEnConsumption = inputWindData.AnnualEnConsumption;
                 ViewBag.AnnualElPrice = inputWindData.AnnualElPrice;
-                ViewBag.MonthlyEnergy = string.Join(",", result.MonthlyEnergyProduced.Select(w_to_gw));
+                ViewBag.Payback = payback;
 
             }
             else
@@ -107,29 +100,20 @@ namespace RenewableEnergyCalculator.Controllers
             EmailData emailData = JsonSerializer.Deserialize<EmailData>(json);
 
             byte[] bytes = Convert.FromBase64String(emailData.SolarChart.Split(',')[1]);
-            Image image = Image.GetInstance(bytes);
+            
 
             var solarTableData = Convert.FromBase64String(emailData.SolarTable);
             string decodedString = Encoding.UTF8.GetString(solarTableData);
 
-            StringReader title = new StringReader("<h2 style='text-align:center;'>Wind Energy Report</h2><br>");
-            StringReader solarTable = new StringReader(decodedString);
-
-            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-            var htmlparser = new HTMLWorker(pdfDoc);
+            
 
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
-                pdfDoc.Open();
-                htmlparser.Parse(title);
-                image.ScaleAbsolute(image.Width / 3, image.Height / 3);
-                image.SetAbsolutePosition((PageSize.A4.Width - image.ScaledWidth) / 2, (PageSize.A4.Height - image.ScaledHeight) / 3);
-                pdfDoc.Add(image);
-                htmlparser.Parse(solarTable);
-                pdfDoc.Close();
-                byte[] bytes1 = memoryStream.ToArray();
-                memoryStream.Close();
+                StringReader title = new StringReader("<h2 style='text-align:center;'>Wind Energy Report</h2><br>");
+                StringReader table = new StringReader(decodedString);
+                Image image = Image.GetInstance(bytes);
+
+                var emailBytes = PDFGenerator.PDFGenerator.GeneratePDF(memoryStream, image, title, table);
 
 
                 // prepare the mail
@@ -140,7 +124,7 @@ namespace RenewableEnergyCalculator.Controllers
                 mail.TrySetRecipient(recipient);
                 mail.TrySetSubject();
                 mail.TrySetBody("Thank you for choosing our app!\n\nPlease, find the requested report attached to this email.");
-                mail.TryAddAtachement1(new MemoryStream(bytes1), "WindEnergyReport.pdf");
+                mail.TryAddAtachement1(new MemoryStream(emailBytes), "WindEnergyReport.pdf");
 
                 mail.TrySendEmail();
             }

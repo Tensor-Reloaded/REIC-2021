@@ -82,9 +82,12 @@
                         Select an existing panel or choose the panel type.
                         <br />
                         @Html.LabelFor(m => m.Panel, "Panel:", new { @class = "field-label" })
-                        @Html.DropDownListFor(m => m.Panel, (SelectList)@ViewBag.Panels, new { @class = "w-select" })
+                        @Html.DropDownListFor(m => m.Panel, new SelectList(@ViewBag.Panels, "Value", "Text", 0), new { @class = "w-select" })
+                        @Html.ValidationMessageFor(m => m.Panel, "", new { @Style = "color: red;" })
+
                         @Html.LabelFor(m => m.PanelType, "Panel type:", new { @class = "field-label" })
                         @Html.DropDownListFor(m => m.PanelType, new SelectList(@ViewBag.PanelTypes, "Value", "Text", 0), new { @class = "w-select" })
+                        @Html.ValidationMessageFor(m => m.PanelType, "", new { @Style = "color: red;" })
                     </div>
                 </div>
             </div>
@@ -99,7 +102,7 @@
                 <div class="column w-col w-col-6">
                     <div class="w-form">
                         @Html.LabelFor(m => m.Currency, "Currency:", new { @class = "field-label" })
-                        @Html.DropDownListFor(m => m.Currency, (SelectList)@ViewBag.Currencies, new { @class = "w-select" })
+                        @Html.DropDownListFor(m => m.Currency, new SelectList(@ViewBag.Currencies, "Value", "Text", 0), new { @class = "w-select" })
                         @Html.ValidationMessageFor(m => m.Currency, "", new { @Style = "color: red;" })
 
                         @Html.LabelFor(m => m.AnnualEnConsumption, "Average annual energy consumption (kWh):", new { @class = "field-label" })

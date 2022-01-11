@@ -29,41 +29,15 @@ namespace RenewableEnergyCalculator.Controllers
 
     public class SolarEnergyController : Controller
     {
-        private MongoDbContext db = new MongoDbContext();
+        private readonly MongoDbContext db = new MongoDbContext();
 
         // GET: SolarEnergy
         public ActionResult Index()
         {
             ViewBag.Orientations = GetOrientations();
             ViewBag.PanelTypes = GetPanelTypes();
-
-            var panels = db.PanelsCollection.Find(panel => true).ToList();
-
-            List<SelectListItem> panelsList = panels.ConvertAll(a => {
-                return new SelectListItem() {
-                    Text = a.Model.ToString()+ "("+a.Manufacturer.ToString()+")",
-                    Value = a.Id.ToString()
-                };
-            });
-
-            panelsList.Insert(0, new SelectListItem() {
-                Text = "Select a panel...",
-                Value = "0"
-            });
-
-            var panelss = new SelectList(panelsList, "Value", "Text", 0);
-
-            ViewBag.Panels = panelss;
-
-
-            var listCurrencies = new[] {
-                new { Text = "Select currency...", Value = "0" },
-                new { Text = "EUR", Value = "EUR" },
-            };
-
-            var currencies = new SelectList(listCurrencies, "Value", "Text", 2);
-
-            ViewBag.Currencies = currencies;
+            ViewBag.Panels = GetPanels();
+            ViewBag.Currencies = GetCurrencies();
 
             return View("SolarEnergy");
         }
@@ -96,13 +70,10 @@ namespace RenewableEnergyCalculator.Controllers
                 var averageAnnualRadiation = solarRadiation.GetAverageAnnualRadiation(averageMonthlyRadiation);
 
                 SolarEnergyCalculator calculator = new SolarEnergyCalculator();
-
                 var monthlyEnergy = calculator.CalculateMonthlyEnergy(inputSolarData.Width, inputSolarData.Length, panel.Area, panel.Efficiency, averageMonthlyRadiation, 0.75);
                 var annualEnergy = calculator.CalculateAnnualEnergy(monthlyEnergy);
-
                 var panelsCost = panel.Cost * calculator.GetNrOfPanels(inputSolarData.Width * inputSolarData.Length, panel.Area);
-
-                var payback = calculator.CalculateROI(panelsCost, inputSolarData.AnnualEnConsumption, inputSolarData.AnnualElPrice);
+                var payback = SolarEnergyCalculator.CalculateROI(panelsCost, inputSolarData.AnnualEnConsumption, inputSolarData.AnnualElPrice);
 
 
                 ViewBag.Location = inputSolarData.Address;
@@ -128,7 +99,6 @@ namespace RenewableEnergyCalculator.Controllers
                 //ViewBag.AnnualRadiation = averageAnnualRadiation;
                 //ViewBag.MonthlyEnergy = string.Join(",", monthlyEnergy);
                 
-                
             }
             else
             {
@@ -147,30 +117,17 @@ namespace RenewableEnergyCalculator.Controllers
             EmailData emailData = JsonSerializer.Deserialize<EmailData>(json);
 
             byte[] bytes = Convert.FromBase64String(emailData.SolarChart.Split(',')[1]);
-            Image image = Image.GetInstance(bytes);
 
             var solarTableData = Convert.FromBase64String(emailData.SolarTable);
             string decodedString = Encoding.UTF8.GetString(solarTableData);
 
-            StringReader title = new StringReader("<h2 style='text-align:center;'>Solar Energy Report</h2><br>");
-            StringReader solarTable = new StringReader(decodedString);
-
-            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-            var htmlparser = new HTMLWorker(pdfDoc);
-
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
-                pdfDoc.Open();
-                htmlparser.Parse(title);
-                image.ScaleAbsolute(image.Width/3, image.Height/3);
-                image.SetAbsolutePosition((PageSize.A4.Width - image.ScaledWidth) / 2, (PageSize.A4.Height - image.ScaledHeight)/3);
-                pdfDoc.Add(image);
-                htmlparser.Parse(solarTable);
-                pdfDoc.Close();
-                byte[] bytes1 = memoryStream.ToArray();
-                memoryStream.Close();
+                StringReader title = new StringReader("<h2 style='text-align:center;'>Solar Energy Report</h2><br>");
+                StringReader table = new StringReader(decodedString);
+                Image image = Image.GetInstance(bytes);
 
+                var emailBytes = PDFGenerator.PDFGenerator.GeneratePDF(memoryStream, image, title, table);
 
                 // prepare the mail
                 var mail = new Mail();
@@ -180,7 +137,7 @@ namespace RenewableEnergyCalculator.Controllers
                 mail.TrySetRecipient(recipient);
                 mail.TrySetSubject();
                 mail.TrySetBody("Thank you for choosing our app!\n\nPlease, find the requested report attached to this email.");
-                mail.TryAddAtachement1(new MemoryStream(bytes1), "SolarEnergyReport.pdf");
+                mail.TryAddAtachement1(new MemoryStream(emailBytes), "SolarEnergyReport.pdf");
 
                 mail.TrySendEmail();
             }
@@ -216,6 +173,36 @@ namespace RenewableEnergyCalculator.Controllers
             });
 
             return panels;
+        }
+
+
+        private List<SelectListItem> GetPanels()
+        {
+            var panels = db.PanelsCollection.Find(panel => true).ToList();
+
+            List<SelectListItem> panelsList = panels.ConvertAll(a => {
+                return new SelectListItem() {
+                    Text = a.Model.ToString() + "(" + a.Manufacturer.ToString() + ")",
+                    Value = a.Id.ToString()
+                };
+            });
+
+            panelsList.Insert(0, new SelectListItem() {
+                Text = "Select a panel...",
+                Value = "0"
+            });
+
+            return panelsList;
+        }
+
+        public static List<SelectListItem> GetCurrencies()
+        {
+            var listCurrencies = new List<SelectListItem> {
+                new SelectListItem { Text = "Select currency...", Value = "0" },
+                new SelectListItem { Text = "EUR", Value = "EUR" },
+            };
+
+            return listCurrencies;
         }
 
         public class EmailData

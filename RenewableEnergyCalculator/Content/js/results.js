@@ -27,6 +27,8 @@ $(document).ready(function () {
     $("#btnSubmit").click(sendFormData);
 
     function sendFormData() {
+        $("#loader").show();
+
         var email = document.getElementById("email").value;
         console.log(email);
 
@@ -55,7 +57,9 @@ $(document).ready(function () {
                 success: function (res) {
                     //TODO: Add whatever if you want to pass a notification back
                     if (res == true) {
+                        $("#loader").hide();
                         alert("The email was sent!");
+
                     } else {
                         alert("An error occured while sending the email.");
                     }

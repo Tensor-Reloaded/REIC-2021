@@ -21,6 +21,8 @@
         /// </summary>
         public float CutOutSpeed { get; }
 
+        public double Cost { get;  }
+
         /// <summary>
         /// A curve that show how much energy (kW) we produce if the wind blows at x m/s.
         /// </summary>
@@ -31,12 +33,13 @@
         /// </summary>
         public double RatedPower => PowerCurve.MaxValue;
 
-        public Turbine(float hubHeight, float cutInSpeed, float cutOutSpeed, PowerCurve powerCurve)
+        public Turbine(float hubHeight, float cutInSpeed, float cutOutSpeed, PowerCurve powerCurve, double cost)
         {
             HubHeight = hubHeight;
             CutInSpeed = cutInSpeed;
             CutOutSpeed = cutOutSpeed;
             PowerCurve = powerCurve;
+            Cost = cost;
         }
     }
 }

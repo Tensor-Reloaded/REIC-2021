@@ -7,10 +7,13 @@
         </div>
     </div>
 </div>
-<div class="section cc-store-home-wrap">
+
+<div id="loader" class="center" style="display:none"></div>
+
+<div id="formSection" class="section cc-store-home-wrap">
 
     <form id="regForm" method="post" action="@Url.Action("InputData", "WindEnergy")">
-
+        @Html.ValidationSummary(true)
         <!-- Steps of the form: -->
         <div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
             <span class="step">Address</span>
@@ -40,16 +43,18 @@
         <div class="tab">
             <div class="columns w-row">
                 <div class="column w-col w-col-6">
-                    <img width="518" src="~/Content/images/turbine_a.jpg"  alt="" class="image">
+                    <img width="518" src="~/Content/images/turbine_a.jpg" alt="" class="image">
                 </div>
                 <div class="column w-col w-col-6">
                     <div class="center">
                         <div>
                             @Html.LabelFor(m => m.Turbine, "Turbine:", new { @class = "field-label" })
                             @Html.DropDownListFor(m => m.Turbine, new SelectList(@ViewBag.Turbines, "Value", "Text", 0), new { @class = "w-select" })
+                            @Html.ValidationMessageFor(m => m.Turbine, "", new { @Style = "color: red;" })
 
                             @Html.LabelFor(m => m.NumberOfTurbines, "Number of turbines:", new { @class = "field-label" })
                             @Html.TextBoxFor(m => m.NumberOfTurbines, new { @class = "input w-input", @name = "NumberOfTurbines", @placeholder = "", @Value = "" })
+                            @Html.ValidationMessageFor(m => m.NumberOfTurbines, "", new { @Style = "color: red;" })
                         </div>
                     </div>
                 </div>
@@ -64,8 +69,9 @@
                 <div class="column w-col w-col-6">
                     <div class="w-form">
                         @Html.LabelFor(m => m.Currency, "Currency:", new { @class = "field-label" })
-                        @Html.DropDownListFor(m => m.Currency, (SelectList)@ViewBag.Currencies, new { @class = "w-select" })
-                            
+                        @Html.DropDownListFor(m => m.Currency, new SelectList(@ViewBag.Currencies, "Value", "Text", 0), new { @class = "w-select" })
+                        @Html.ValidationMessageFor(m => m.Currency, "", new { @Style = "color: red;" })
+
                         @Html.LabelFor(m => m.AnnualEnConsumption, "Annual energy consumption:", new { @class = "field-label" })
                         @Html.TextBoxFor(m => m.AnnualEnConsumption, new { @class = "input w-input", @name = "AnnualEnConsumption", @placeholder = "", @Value = "" })
                         @Html.ValidationMessageFor(m => m.AnnualEnConsumption)

@@ -8,7 +8,7 @@ namespace RenewableEnergyCalculator.Calculator
     public class SolarEnergyCalculator
     {
         private readonly double border = 0.3;
-        private readonly double averageInverterPrice = 1324.24;
+        private static readonly double averageInverterPrice = 1324.24;
         public List<double> CalculateMonthlyEnergy(double width, double length, double panelArea, double r, List<double> H, double PR)
         {
             var totalPanelArea = GetPanelArea(width, length);
@@ -56,12 +56,11 @@ namespace RenewableEnergyCalculator.Calculator
             return nrOfPanels;
         }
 
-        public double CalculateROI(double panelsCost, double averageAnnualConsumption, double electricityPrice)
+        public static double CalculateROI(double panelsCost, double averageAnnualConsumption, double electricityPrice)
         {
             // Annual Electric Bills Cost
             var annualElectricityCost = averageAnnualConsumption * electricityPrice;
 
-            //
             var systemCost = panelsCost + averageInverterPrice + 0.30* panelsCost;
 
             var payback = Math.Round(systemCost / annualElectricityCost);
