@@ -16,7 +16,7 @@ Hoamea Teodora  (MSD) (teodora.hoamea@gmail.com)
 
 Pavel Andrei     (MOC) (andrei_pavel99@yahoo.com)
 
-Vasilița Irina   (MOC) (irinavasilitav@gmail.com)
+Vasilița Irina   (MOC) (vasilitairina@gmail.com)
 
 ## Coordinator: 
 
