@@ -40,5 +40,5 @@ Colab. Simionescu Cristian
 [Data](https://docs.google.com/document/d/1wUx4Ua6Q5ShfvlU6a1JfnloDiBp3mIJ-D3hu71P_lLE/edit?usp=sharing)
 
 ## Technical report:
-[Documentation](https://docs.google.com/document/d/1xzUYFa_U-HUwKIDOdIXCe7y_k7HQWlFUbVGY47n4OkU/edit?usp=sharing)
+[Documentation](https://drive.google.com/file/d/1aIqoklP-kVGIfnl83uJ-OoRpYMZ5GkuT/view?usp=sharing)
 
